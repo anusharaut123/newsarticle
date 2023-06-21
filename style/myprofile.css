@@ -1,0 +1,50 @@
+/*for front page*/
+* {
+    margin: 0;
+    padding: 0;
+
+}
+
+
+.main {
+
+    background-position: center;
+    background-size: cover;
+    background-color: #fbf2e3;
+    background-image: url(image/sil.jpg);
+ 
+   
+
+}
+
+.navbar {
+    width: 1200px;
+    height: 75px;
+    margin: auto;
+}
+
+.icon {
+    width: 200px;
+    float: left;
+    height: 70px;
+
+}
+
+.logo {
+    color: royalblue;
+    font-size: 35px;
+    font-family: Arial, Helvetica, sans-serif;
+    padding-left: 20px;
+    float: left;
+    padding-top: 10px;
+
+}
+
+.menu {
+    width: 400px;
+    float: left;
+    height: 70px;
+    
+    /* position: fixed; */
+
+}
