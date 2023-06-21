@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(!isset($_COOKIE['auth']) && $_COOKIE['auth']!="true"){
+if(!isset($_COOKIE['userauth']) && $_COOKIE['userauth']!="true"){
   header('location: ../index.php');
 }
 ?>
