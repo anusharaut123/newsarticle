@@ -38,7 +38,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 
 <!--costom css-->
 
-<link rel="stylesheet" href=style/admin.css>
+<link rel="stylesheet" href=../style/admin.css>
 </head>
 <body>
     <div class="container">

@@ -8,7 +8,7 @@ require "validatenews.php";
 <html>
   <head>
     <title>Add News</title>
-    <link ref="stylesheet" type="text/css" href="style/addnews.css">
+    <link rel="stylesheet" type="text/css" href="../style/addnews.css">
   </head>
   <body>
   
@@ -21,6 +21,7 @@ require "validatenews.php";
   <option value="sports">Sports</option>
   <option value="business">Bussiness</option>
 </select>
+
 <div class="form-group">
   <label for="author">Author Name:</label>
   <input type="text" class="form-control" name="author" id="author">
