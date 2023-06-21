@@ -13,7 +13,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
             $validate=false;
         }
         if($validate){
-            $query= "INSERT INTO admin_login (name, email, password, type) VALUES ('$username','$email', '$password', 'basic')";
+            $query= "INSERT INTO userdata (name, email, password) VALUES ('$username','$email', '$password')";
             $execute=mysqli_query($conn, $query);
             if($execute){
                 header("Refresh:0");
@@ -28,13 +28,13 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     if(isset($_POST['login'])){
         $email=$_POST['email'];
         $password=$_POST['password'];
-        $query="SELECT email, password from admin_login WHERE email='$email' AND password='$password' LIMIT 1";
+        $query="SELECT email, password from userdata WHERE email='$email' AND password='$password' LIMIT 1";
         $execute=mysqli_query($conn, $query);
         $data=mysqli_fetch_array($execute);
         if($data['email']==$email && $data['password']==$password){
-            $_SESSION['email']=$data['email'];
-            $_SESSION['adminsessionid']=session_id();
-            setcookie('auth','true', time()+18000);
+            $_SESSION['useremail']=$data['email'];
+            $_SESSION['usersessionid']=session_id();
+            setcookie('userauth','true', time()+18000);
             header('location: userprofile.php');
             
         }
