@@ -12,7 +12,7 @@ if(!isset($_COOKIE['auth']) && $_COOKIE['auth']!="admintrue"){
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Dashboard of NRS</title>
-  <link rel="stylesheet" href="./style/dashboard.css">
+  <link rel="stylesheet" href="../style/dashboard.css">
 </head>
 
 <body>
@@ -21,7 +21,7 @@ if(!isset($_COOKIE['auth']) && $_COOKIE['auth']!="admintrue"){
       <h1>DASHBOARD</h1>
       <ul>
         <li><a href="adminhome.php">Home</a></li>
-        <li><a href="#">Product</a></li>
+        <li><a href="category.php">Category</a></li>
         <li><a href="addnews.php">Add News</a></li>
         <li><a href="logoutadmin.php">Log out</a></li>
       </ul>

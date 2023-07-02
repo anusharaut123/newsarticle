@@ -93,14 +93,16 @@ if(!isset($_COOKIE['userauth']) && $_COOKIE['userauth']!="true"){
       <div class="menu">
         <ul>
           <li><a href="myprofile.php">My profile</a></li>
-          <li><a href="#">Edit profile</a></li>
-          <li><a href="#">Change Password</a></li>
-          <li><a href="#">Delete</a></li>
+          <li><a href="editprofile.php">Edit profile</a></li>
+          <li><a href="changepassword.php">Change Password</a></li>
+          <li><a href="delete.php">Delete</a></li>
+          <li><a href="news.php">News</a></li>
           <li><a href="userlogout.php">Log out</a></li>
           
         </ul>
       </div>
       <div>
+        <?php echo "welcome ".$_SESSION['username'] ?>
       </div>
 </body>
 

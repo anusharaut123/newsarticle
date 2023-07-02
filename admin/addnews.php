@@ -9,6 +9,8 @@ require "validatenews.php";
   <head>
     <title>Add News</title>
     <link rel="stylesheet" type="text/css" href="../style/addnews.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
   </head>
   <body>
   
@@ -27,29 +29,26 @@ require "validatenews.php";
   <input type="text" class="form-control" name="author" id="author">
 </div>
 <div class="form-group">
-  <label for="news">News:</label>
-  <input type="text" class="form-control" name="news" id="news">
-</div>
-<div class="form-group">
   <label for="title">Title:</label>
   <input type="text" class="form-control" name="title" id="title">
 </div>
 <div class="form-group">
-  <label for="introduction">Introduction:</label>
+  <label for="introduction">Short description:</label>
   <textarea class="form-control" name="introduction" id="introduction"></textarea>
 </div>
-<label for="image1">Upload Image:</label>
-<input type="file" id="image1" name="image1">
-<div class="form-group">
+<div class="category-image">
+  <label for="image">Image</label>
+  <button type="button" name="image" class="plus-button" id="add-image">
+  <i class="fas fa-plus"></i> +
+</button>
+  <input type="file" name="image" id="image" multiple /> 
+  <ul id="image-list"></ul>
+  <div id="image-container"></div>
+</div>
   <label for="description">Description:</label>
   <textarea class="form-control" rows="5" name="description" id="description"></textarea>
 </div>
-<label for="image"2>Upload Image:</label>
-<input type="file" id="image2" name="image2">
-<div class="form-group">
-  <label for="conclusion">Conclusion:</label>
-  <textarea class="form-control" name="conclusion" id="conclusion"></textarea>
-</div>
+
 <input type="submit" name="newssubmit" class="btn btn-primary" value="Add News">
 </form>
 </div>
@@ -58,4 +57,14 @@ require "validatenews.php";
 include('../include/footer.php');
 ?>
 </body>
+
+<script>
+
+  $(document).ready(function() {
+    $('#add-image').click(function() {
+      var imageInput = $('#image').clone();
+      $('#image-container').append(imageInput);
+    });
+  });
+</script>
 </html>

@@ -1,4 +1,4 @@
-/* CSS for My Profile page */
+/* CSS for Delete Account page */
 
 * {
   box-sizing: border-box;
@@ -9,7 +9,6 @@
 body {
   font-family: Arial, sans-serif;
 }
-
 .main {
   background-size: cover;
   background-color: #fbf2e3;
@@ -65,16 +64,20 @@ ul li a {
   padding: 20px;
 }
 
+h1 {
+  margin-bottom: 10px;
+}
+
 .form-group {
   margin-bottom: 10px;
 }
 
-.gender-options {
-  margin-top: 10px;
+label {
+  display: block;
+  margin-bottom: 5px;
 }
 
-input[type="text"],
-input[type="radio"] {
+input[type="text"] {
   margin-bottom: 5px;
   padding: 5px;
   width: 100%;
@@ -82,13 +85,21 @@ input[type="radio"] {
   border-radius: 4px;
 }
 
-input[type="submit"] {
+p {
+  margin-bottom: 10px;
+}
+
+form {
   margin-top: 10px;
+}
+
+button[type="submit"] {
   padding: 5px 10px;
-  background-color: #4caf50;
+  background-color: #f44336;
   color: white;
   border: none;
   cursor: pointer;
 }
 
 /* Add additional styles as needed */
+

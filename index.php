@@ -23,7 +23,7 @@
           <ul>
             <li><a href="#home">HOME</a></li>
             <li><a href="#about">ABOUT</a></li>
-            <li><a href="#news">NEWS</a></li>
+            <li><a href="user/news.php">NEWS</a></li>
             <li><a href="#contact">CONTACT</a></li>
             <li><a href="user/loginsignup.php">LOGIN</a></li>
 
@@ -77,52 +77,6 @@
 
   <br><br><br><br>
 
-
-
-  <section id="product">
-    <div class="imgs">
-
-      <?php
-      $i = 0;
-      $sql = mysqli_query($conn, "select * from productdb");
-      echo "<table><tr>";
-      while ($r_res = mysqli_fetch_assoc($sql)) {
-          
-          if($i<4)
-{          
-      ?>
-
-
-              <td>
-                <div class="gallerys">
-                  <img src="./image/upload/<?php echo $r_res['image']; ?>" alt="Image" id="img1" width="400" height="300" style="width: 300px; height: 300px;">
-                  <div class="desc"><b> <?php echo $r_res['name']; ?></b></div>
-                  <div class="desc"><?php echo substr($r_res['startingbid'], 0, 100); ?></div><br>
-                  <button style="background-color: grey; width: 100px;height: 40px;"><a href="detail.php">Quick View</a></button>
-                </div>
-              </td>
-
-
-
-          <?php 
-              $i++;
-              
-                
-            }
-            else{
-              echo "</tr>";
-              break;
-            }
-            } ?>
-
-          
-        </table>
-        
-    </div><br><br>
-    <center><button><a href="fetchproduct.php">View More</a></button></center>
-  </section>
-
-  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
   <section id="contact">
     <h3 class="h3">CONTACT US</h3><br>

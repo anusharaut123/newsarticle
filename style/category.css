@@ -1,0 +1,156 @@
+/* CSS code */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        
+        h2 {
+            color: #333;
+        }
+        
+        form {
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 10px;
+        }
+        
+        label {
+            font-weight: bold;
+        }
+        
+        input[type="text"] {
+            padding: 5px;
+            width: 200px;
+        }
+        
+        .field.btn {
+            margin-top: 10px;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+      
+        
+        
+        th,
+        td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+        }
+        
+        button {
+            padding: 5px 10px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background-color: #555;
+        }
+
+    /*edit profile css*/
+
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  height: 100px;
+}
+
+h2 {
+  color: #333;
+  font-size: 24px;
+}
+
+.form-group {
+  margin-top: 10px;
+}
+
+label {
+  color: #666;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="file"] {
+  margin-bottom: 5px;
+  padding: 5px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+input[type="radio"] {
+  margin-top: 5px;
+  margin-right: 5px;
+}
+
+button {
+  background-color: #0bf31e;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #04ee1f;
+}
+
+.navbar {
+  width: 1200px;
+  height: 100px;
+  margin: auto;
+}
+
+.icon {
+  width: 500px;
+  float: left;
+  height: 10px;
+
+}
+
+.menu {
+  width: 700px;
+  float: left;
+  height: 100px;
+
+  /* position: fixed; */
+
+}
+
+ul {
+  float: left;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+ul li {
+  list-style: none;
+  margin-left: 62px;
+  margin-top: 27px;
+  font-size: 20px;
+}
+
+ul li a {
+  text-decoration: none;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  transition: 0.4s ease-in-out;
+  color: black;
+}
+
