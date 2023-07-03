@@ -8,23 +8,33 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         $shortdescription=$_POST['shortdescription'];
         $description=$_POST['description'];
 
-        $tempimage1 = explode(".", $_FILES["image1"]["name"]);
-        $newfilename = uniqid().".".end($tempimage1);
-        $fileType = end($tempimage1);
-        $allowTypes = array('jpg','png','jpeg');
+        $query="INSERT INTO news (category, authorname, title, introduction, description) VALUES('$category', '$authorname', '$title', '$shortdescription', '$description')";
+        if(mysqli_query($conn, $query)){
+            echo "News Added successfully";
+            $newId = mysqli_insert_id($conn);
+            echo $newId;
+            $allowTypes = array('jpg','png','jpeg');
+            $targetDirectory = "newsimage/";
 
-        $tempimage2 = explode(".", $_FILES["image2"]["name"]);
-        $newfilename2 = uniqid().".".end($tempimage2);
-        $fileType2 = end($tempimage2);
-        $allowTypes2 = array('jpg','png','jpeg');
+            foreach ($_FILES['images']['tmp_name'] as $key => $tmpName) {
+                $extension = pathinfo($_FILES['images']['name'][$key], PATHINFO_EXTENSION);
+                $uniqueFilename = uniqid() . '_' . bin2hex(random_bytes(8)) . '.' . $extension;
+                $targetFile = $targetDirectory . $uniqueFilename;
 
-        if(in_array($fileType,$allowTypes) && in_array($fileType2,$allowTypes2)){
-            $query="INSERT INTO news (category, authorname, title, shortdescription, uploadimg1, description, uploadimg2) VALUES('$category', '$authorname', '$title', '$shortdescription', '$newfilename', '$description', '$newfilename2')";
-            if(mysqli_query($conn, $query)){
-                move_uploaded_file($_FILES["image1"]["tmp_name"],'newsimage/'.$newfilename);
-                move_uploaded_file($_FILES["image2"]["tmp_name"],'newsimage/'.$newfilename2);
+                if(in_array($extension, $allowTypes)){
+                    if (move_uploaded_file($tmpName, $targetFile) && in_array($extension, $allowTypes)) {
+                        echo 'Image uploaded successfully: ' . $targetFile . '<br>';
+                        $query="INSERT INTO news_image (newsid, imagename) VALUES('$newId', '$uniqueFilename')";
+                        if(mysqli_query($conn, $query)){
+                            echo "image inserted";
+                        }
 
+                    } else {
+                        echo 'Image upload failed: ' . $_FILES['images']['name'][$key] . '<br>';
+                    }
+                }
             }
-        }          
+        }
+     
     }  
 }

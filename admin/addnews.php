@@ -12,7 +12,7 @@ require "validatenews.php";
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
   </head>
-  <body>
+<body>
   
 <form action="#" method="POST" enctype="multipart/form-data">
 <h1>Add News</h1>
@@ -34,14 +34,14 @@ require "validatenews.php";
 </div>
 <div class="form-group">
   <label for="introduction">Short description:</label>
-  <textarea class="form-control" name="introduction" id="introduction"></textarea>
+  <textarea class="form-control" name="shortdescription" id="shortdescripttion"></textarea>
 </div>
 <div class="category-image">
   <label for="image">Image</label>
   <button type="button" name="image" class="plus-button" id="add-image">
   <i class="fas fa-plus"></i> +
 </button>
-  <input type="file" name="image" id="image" multiple /> 
+  <input type="file" name="images[]" id="image" multiple /> 
   <ul id="image-list"></ul>
   <div id="image-container"></div>
 </div>
