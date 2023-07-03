@@ -20,9 +20,10 @@ if(!isset($_COOKIE['auth']) && $_COOKIE['auth']!="admintrue"){
     <div class="sidebar">
       <h1>DASHBOARD</h1>
       <ul>
-        <li><a href="adminhome.php">Home</a></li>
+        <li><a href="admin/adminhome.php">Home</a></li>
         <li><a href="category.php">Category</a></li>
         <li><a href="addnews.php">Add News</a></li>
+        <li><a href="#">User</a></li>
         <li><a href="logoutadmin.php">Log out</a></li>
       </ul>
     </div>

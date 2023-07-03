@@ -1,3 +1,29 @@
+<?php
+session_start();
+require "../db/connection.php";
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  if (isset($_POST['submit'])) {
+    if (isset($_POST['fname']) && isset($_POST['lname']) &&
+        isset($_POST['gender']) && isset($_POST['email']) &&
+        isset($_POST['age'])) {
+      
+      $firstname = $_POST['fname'];
+      $lastname = $_POST['lname'];
+      $email = $_POST['email'];
+      $age = $_POST['age'];
+      $gender = $_POST['gender'];
+
+      $sql = "INSERT INTO udata (firstname, lastname, email, age, gender) VALUES ('$firstname', '$lastname', '$email', '$age', '$gender')";
+      
+      if (mysqli_query($conn, $sql)) {
+        echo "Profile data saved successfully.";
+      } else {
+        echo "Error saving profile data.";
+      }
+    }
+  }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

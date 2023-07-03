@@ -5,6 +5,9 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     if(isset($_POST['signup'])){
         $email=$_POST['email'];
         $username=$_POST['username'];
+        $age=$_POST['age'];
+        $address=$_POST['address'];
+        $gender=$_POST['gender'];
         $password=$_POST['password'];
         $cpassword=$_POST['cpassword'];
         
@@ -13,7 +16,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
             $validate=false;
         }
         if($validate){
-            $query= "INSERT INTO userdata (name, email, password) VALUES ('$username','$email', '$password')";
+            $query= "INSERT INTO userdata (name, email, age, address, gender, password) VALUES ('$username','$email', '$age', '$address', '$gender', '$password')";
             $execute=mysqli_query($conn, $query);
             if($execute){
                 header("Refresh:0");
@@ -87,6 +90,15 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
             </div>
             <div class="field">
               <input type="text" name="email" placeholder="Email" required>
+            </div>
+            <div class="field">
+              <input type="text" name="age" placeholder="Age" required>
+            </div>
+            <div class="field">
+              <input type="text" name="address" placeholder="Address" required>
+            </div>
+            <div class="field">
+              <input type="text" name="gender" placeholder="Gender" required>
             </div>
             <div class="field">
               <input type="password" name="password" placeholder="Password" required>

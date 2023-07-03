@@ -63,20 +63,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <div class="form-group">
   <p>User Name: <?php echo $_SESSION['username'] ?></p>
 </div>
-
 <div class="form-group">
-  <label for="lname">Last name:</label><br>
-  <input type="text" id="lname" name="lname"><br>
+<p>Age: <?php echo $_SESSION['age'] ?></p>
 </div>
 
 <div class="form-group">
-  <label for="email">Email:</label><br>
-  <input type="text" id="email" name="email"><br>
-</div>
-
-<div class="form-group">
-  <label for="age">Age:</label><br>
-  <input type="text" id="age" name="age"><br>
+<p>Password: <?php echo $_SESSION['Password'] ?></p>
 </div>
 
 <label for="gender">Gender:</label>
