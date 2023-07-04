@@ -23,6 +23,8 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 
 </head>
 <body>
+<?php include 'sidebar.php';?>
+
 <form action="#" method="POST">
 <h2>Category</h2>
 

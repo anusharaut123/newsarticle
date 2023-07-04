@@ -31,13 +31,16 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     if(isset($_POST['login'])){
         $email=$_POST['email'];
         $password=$_POST['password'];
-        $query="SELECT id, name, email, password from userdata WHERE email='$email' AND password='$password' LIMIT 1";
+        $query="SELECT id, name, email, age, address, gender, password from userdata WHERE email='$email' AND password='$password' LIMIT 1";
         $execute=mysqli_query($conn, $query);
         $data=mysqli_fetch_array($execute);
         if($data['email']==$email && $data['password']==$password){
             $_SESSION['userid']=$data['id'];
             $_SESSION['username']=$data['name'];
             $_SESSION['useremail']=$data['email'];
+            $_SESSION['userage']=$data['age'];
+            $_SESSION['useraddress']=$data['address'];
+            $_SESSION['usergender']=$data['gender'];
             $_SESSION['usersessionid']=session_id();
             setcookie('userauth','true', time()+18000);
             header('location: userprofile.php');
@@ -97,8 +100,9 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
             <div class="field">
               <input type="text" name="address" placeholder="Address" required>
             </div>
-            <div class="field">
-              <input type="text" name="gender" placeholder="Gender" required>
+            <div>
+              Male: <input style="display: block;" type="radio" name="gender" value="Male"> 
+              Female: <input style="display: block;" type="radio" name="gender" value="Female">
             </div>
             <div class="field">
               <input type="password" name="password" placeholder="Password" required>

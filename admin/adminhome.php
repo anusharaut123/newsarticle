@@ -1,9 +1,11 @@
 <?php
 session_start();
+require "../db/connection.php";
 if(!isset($_COOKIE['auth']) && $_COOKIE['auth']!="admintrue"){
   header('location: admin_login.php');
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,28 +15,58 @@ if(!isset($_COOKIE['auth']) && $_COOKIE['auth']!="admintrue"){
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Dashboard of NRS</title>
   <link rel="stylesheet" href="../style/dashboard.css">
+  <style>
+    .news-container {
+      display: flex;
+      justify-content: center;
+      margin-right: 10px;
+      margin-left: 10px;
+    }
+
+    .news-container .news-detail {
+      flex-grow: 3;
+    }
+
+    .sidebuttons{
+      cursor: pointer;
+    }
+
+    .wrap{
+      margin-left: 220px;
+    }
+  </style>
 </head>
 
 <body>
-  <div class="wrap">
-    <div class="sidebar">
-      <h1>DASHBOARD</h1>
-      <ul>
-        <li><a href="admin/adminhome.php">Home</a></li>
-        <li><a href="category.php">Category</a></li>
-        <li><a href="addnews.php">Add News</a></li>
-        <li><a href="#">User</a></li>
-        <li><a href="logoutadmin.php">Log out</a></li>
-      </ul>
+
+<?php include 'sidebar.php';?>
+    <div class="wrap">
+    <div class="body">
+      <h2>Latest News</h2>
+      <div  class="news-container">
+        <div class="news-detail">
+          <h3>News Title</h3>
+          <p>News content goes here.</p>
+          <a href="fullnews.php">Read More</a>
+        </div>
+        <div>
+          <img style="height:100px; width:170px;" src="../images/download.jpg" alt="News Image">
+        </div>
+      </div>
+
+      <div class="news-container">
+        <div class="news-detail">
+          <h3>News Title</h3>
+          <p>News content goes here.</p>
+          <a href="#">Read More</a>
+        </div>
+        <div>
+          <img style="height:100px; width:170px;" src="../images/background-image.jpg" alt="News Image">
+        </div>
+      </div>
     </div>
-    <section class="main">
-      <h1>WELCOME TO NRS</h1>
-      
-    </section>
   </div>
-  <?php
-include('../include/footer.php');
-?>
-</body>
+
+ </body>
 
 </html>

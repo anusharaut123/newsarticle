@@ -1,14 +1,16 @@
 <?php
 session_start();
+require "../db/connection.php";
 if(!isset($_COOKIE['userauth']) && $_COOKIE['userauth']!="true"){
   header('location: ../index.php');
+
 }
 ?>
 <!DOCTYPE html>
 <html>
 <head>
   <title>News Website</title>
-  <link rel="stylesheet" href="../style/stylee.css"> <!-- Link to your CSS file -->
+  <link rel="stylesheet" href="../style/stylee.css"> 
   <style>
     .news-container {
       display: flex;
@@ -39,30 +41,28 @@ if(!isset($_COOKIE['userauth']) && $_COOKIE['userauth']!="true"){
   </header>
 <div>
     <h2>Latest News</h2>
+    <?php
+      $query="SELECT news.newsid, news.category, news.authorname, news.title, news.introduction, news.description, news_image.imageid, news_image.newsid, news_image.imagename FROM news join news_image on news.newsid=news_image.newsid";
+      $result=mysqli_query($conn, $query);
+      $data= mysqli_num_rows($result);
+      if($data>0){
+          while($row=mysqli_fetch_array($result)){
+      ?>
     <div  class="news-container">
       <div class="news-detail">
-        <h3>News Title</h3>
-        <p>News content goes here.</p>
+        <h3> <?php echo $row['news.title']; ?> </h3>
+        <p><?php echo $row['news.introduction']; ?> </p>
         <a href="fullnews.php">Read More</a>
       </div>
       <div>
-        <img style="height:100px; width:170px;" src="../images/download.jpg" alt="News Image">
+        <img style="height:100px; width:170px;" src="../images/<?php echo $row['news_image.imagename']; ?>" alt="News Image >
       </div>
     </div>
 
-    <div class="news-container">
-      <div class="news-detail">
-        <h3>News Title</h3>
-        <p>News content goes here.</p>
-        <a href="#">Read More</a>
-      </div>
-      <div>
-        <img style="height:100px; width:170px;" src="../images/background-image.jpg" alt="News Image">
-      </div>
-    </div>
-
-
-    </section>
+    <?php
+          }
+      }
+      ?>
 
 </div>
 

@@ -13,6 +13,7 @@ require "validatenews.php";
 
   </head>
 <body>
+<?php include 'sidebar.php';?>
   
 <form action="#" method="POST" enctype="multipart/form-data">
 <h1>Add News</h1>

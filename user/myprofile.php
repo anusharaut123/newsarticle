@@ -1,28 +1,6 @@
 <?php
 session_start();
 require "../db/connection.php";
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  if (isset($_POST['submit'])) {
-    if (isset($_POST['fname']) && isset($_POST['lname']) &&
-        isset($_POST['gender']) && isset($_POST['email']) &&
-        isset($_POST['age'])) {
-      
-      $firstname = $_POST['fname'];
-      $lastname = $_POST['lname'];
-      $email = $_POST['email'];
-      $age = $_POST['age'];
-      $gender = $_POST['gender'];
-
-      $sql = "INSERT INTO udata (firstname, lastname, email, age, gender) VALUES ('$firstname', '$lastname', '$email', '$age', '$gender')";
-      
-      if (mysqli_query($conn, $sql)) {
-        echo "Profile data saved successfully.";
-      } else {
-        echo "Error saving profile data.";
-      }
-    }
-  }
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,7 +31,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
   </div>
   <div class="container">
-    <form action="#" method="POST">
     <h2>My Profile</h2>
 <div style="background-image: url('images');
   background-size: cover; height: 100px;">
@@ -64,29 +41,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <p>User Name: <?php echo $_SESSION['username'] ?></p>
 </div>
 <div class="form-group">
-<p>Age: <?php echo $_SESSION['age'] ?></p>
+<p>Age: <?php echo $_SESSION['userage'] ?></p>
 </div>
 
 <div class="form-group">
-<p>Password: <?php echo $_SESSION['Password'] ?></p>
+<p>Address: <?php echo $_SESSION['useraddress'] ?></p>
+</div>
+<div class="form-group">
+<p>Gender: <?php echo $_SESSION['usergender'] ?></p>
 </div>
 
-<label for="gender">Gender:</label>
-<div class="gender-options">
-  <input type="radio" id="male" name="gender" value="Male">
-  <label for="male">Male</label>
 
-  <input type="radio" id="female" name="gender" value="Female">
-  <label for="female">Female</label>
-
-  <input type="radio" id="other" name="gender" value="Other">
-  <label for="other">Other</label>
-</div>
-
-  <br>
-  <input type="submit" name="submit" value="Save">
- 
-</form>
 </div>
 </body>
 </html>
