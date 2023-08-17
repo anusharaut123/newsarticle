@@ -4,9 +4,11 @@ session_start();
 require "../db/connection.php";
   if($_SERVER["REQUEST_METHOD"]=="POST"){
     if(isset($_POST['submit'])){
+        $userid = $_SESSION['userid'];
+        $newsid = $_GET['newsid'];
         $name=$_POST['name'];
         $comment=$_POST['comment'];
-        $sql = "INSERT INTO comments (name, comment) VALUES ('$name', '$comment')";
+        $sql = "INSERT INTO comments (userid, newsid, name, comment) VALUES ('$name', '$comment')";
         if(mysqli_query($conn, $sql)){ 
           echo "Comment added successfully.";
         } else {
@@ -133,8 +135,8 @@ require "../db/connection.php";
         <p>Thanks for sharing this information. It's very helpful.</p>
     </div>
         <form>
-        <h4>Add your comment:</h4>
-        <input type="text" id="name" name="name" placeholder="Your name" required><br>
+        <h4 style="color: blue">Add your comment:</h4>
+        <h4>User Name: <?php echo $_SESSION['username']; ?></h4>
         <textarea id="comment" name="comment" placeholder="Your comment" required></textarea><br>
         <button type="submit" id="submit" name="submit">Submit</button>
     </form>

@@ -52,7 +52,7 @@ if(!isset($_COOKIE['userauth']) && $_COOKIE['userauth']!="true"){
       <div class="news-detail">
         <h3> <?php echo $row['title']; ?> </h3>
         <p><?php echo $row['introduction']; ?> </p>
-        <a href="fullnews.php">Read More</a>
+        <a href="fullnews.php?newsid=<?php echo $row['newsid']; ?>">Read More</a>
       </div>
       <div>
         <img style="height:100px; width:170px;" src="../admin/newsimage/<?php echo $row['imagename']; ?>" alt="News Image" >

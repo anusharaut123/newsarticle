@@ -30,9 +30,20 @@ require "validatenews.php";
         <hr style="color: black;">
         <label for="category">Categories:</label>
         <select id="category" name="category">
-          <option value=7>Entertainment</option>
-          <option value=6>Sports</option>
-          <option value=5>Bussiness</option>
+        <?php
+            $query = "SELECT * FROM category";
+            $result = mysqli_query($conn, $query);
+            $data = mysqli_num_rows($result);
+            if ($data > 0) {
+                while ($row = mysqli_fetch_array($result)) {
+                  if($row['state'] != 'block'){
+          ?>
+                    <option value=<?php echo $row['categoryid']; ?>><?php echo $row['categoryname']; ?></option>
+          <?php
+                  }
+                }
+            }
+          ?>
         </select>
 
         <div class="form-group">
