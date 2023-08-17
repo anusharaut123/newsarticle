@@ -26,14 +26,6 @@ if(!isset($_COOKIE['auth']) && $_COOKIE['auth']!="admintrue"){
     .news-container .news-detail {
       flex-grow: 3;
     }
-
-    .sidebuttons{
-      cursor: pointer;
-    }
-
-    .wrap{
-      margin-left: 220px;
-    }
   </style>
 </head>
 

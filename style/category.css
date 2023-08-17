@@ -1,4 +1,4 @@
-/* CSS code */
+/*CSS code*/
         body {
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
@@ -134,7 +134,7 @@ button:hover {
 
 ul {
   float: left;
-  display: flex;
+ 
   justify-content: center;
   align-items: center;
 }

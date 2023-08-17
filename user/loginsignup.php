@@ -43,7 +43,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
             $_SESSION['usergender']=$data['gender'];
             $_SESSION['usersessionid']=session_id();
             setcookie('userauth','true', time()+18000);
-            header('location: userprofile.php');
+            header('location: myprofile.php');
             
         }
        
@@ -87,34 +87,71 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
             </div>
             <div class="signup-link">Not a member? <a href="">Signup now</a></div>
           </form>
-          <form action="#" class="signup" method="post">
-            <div class="field">
-              <input type="text" name="username" placeholder="Name" required>
-            </div>
-            <div class="field">
-              <input type="text" name="email" placeholder="Email" required>
-            </div>
-            <div class="field">
-              <input type="text" name="age" placeholder="Age" required>
-            </div>
-            <div class="field">
-              <input type="text" name="address" placeholder="Address" required>
-            </div>
-            <div>
-              Male: <input style="display: block;" type="radio" name="gender" value="Male"> 
-              Female: <input style="display: block;" type="radio" name="gender" value="Female">
-            </div>
-            <div class="field">
-              <input type="password" name="password" placeholder="Password" required>
-            </div>
-            <div class="field">
-              <input type="password" name="cpassword" placeholder="Confirm password" required>
-            </div>
-            <div class="field btn">
-              <div class="btn-layer"></div>
-              <input type="submit" name="signup" value="Signup">
-            </div>
-          </form>
+          <form action="#" class="signup" method="post" onsubmit="return validateForm()">
+  <div class="field">
+    <input type="text" name="username" id="username" placeholder="Name" required>
+  </div>
+  <div class="field">
+    <input type="text" name="email" id="email" placeholder="Email" required>
+  </div>
+  <div class="field">
+    <input type="text" name="age" id="age" placeholder="Age" required>
+  </div>
+  <div class="field">
+    <input type="text" name="address" id="address" placeholder="Address" required>
+  </div>
+  <div class="field">
+    <input type="password" name="password" id="password" placeholder="Password" required>
+  </div>
+  <div class="field">
+    <input type="password" name="cpassword" id="cpassword" placeholder="Confirm password" required>
+  </div>
+  <div class="field btn">
+    <div class="btn-layer"></div>
+    <input type="submit" name="signup" value="Signup">
+  </div>
+</form>
+
+<script>
+  function validateForm() {
+    var username = document.getElementById("username").value;
+    var email = document.getElementById("email").value;
+    var age = document.getElementById("age").value;
+    var address = document.getElementById("address").value;
+    var password = document.getElementById("password").value;
+    var cpassword = document.getElementById("cpassword").value;
+
+    if (!/^[A-Z][a-zA-Z]*$/.test(username)) {
+      alert("Name should start with a capital letter");
+      return false;
+    }
+
+    if (!email.includes("@")) {
+      alert("Email should contain the @ symbol");
+      return false;
+    }
+
+    if (!/^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d!@#$%^&*()]+$/.test(password)) {
+      alert("Password should contain at least one capital letter, one special character, and one number");
+      return false;
+    }
+
+    if (password !== cpassword) {
+      alert("Password and confirm password should match");
+      return false;
+    }
+
+    if (!/^\d+$/.test(age)) {
+      alert("Age should contain only numbers");
+      return false;
+    }
+
+    // Additional validation logic if needed
+
+    return true; // Submit the form if all validation passes
+  }
+</script>
+
         </div>
       </div>
     </div>

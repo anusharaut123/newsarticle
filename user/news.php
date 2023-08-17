@@ -35,14 +35,14 @@ if(!isset($_COOKIE['userauth']) && $_COOKIE['userauth']!="true"){
         <li><a href="sport.php">Sports</a></li>
         <li><a href="entertainment.php">Entertainment</a></li>
         <li><a href="userprofile.php">Profile</a></li>
-        <li><a href="logout.php">Logout</a></li>
+        <li><a href="userlogout.php">Logout</a></li>
       </ul>
     </nav>
   </header>
 <div>
     <h2>Latest News</h2>
     <?php
-      $query="SELECT news.newsid, news.category, news.authorname, news.title, news.introduction, news.description, news_image.imageid, news_image.newsid, news_image.imagename FROM news join news_image on news.newsid=news_image.newsid";
+      $query="SELECT news.newsid as newsid, news.category as category, news.authorname as authorname, news.title as title, news.introduction as introduction, news.description as description, news_image.imageid as imageid, news_image.newsid as newsid, news_image.imagename as imagename FROM news join news_image on news.newsid=news_image.newsid";
       $result=mysqli_query($conn, $query);
       $data= mysqli_num_rows($result);
       if($data>0){
@@ -50,12 +50,12 @@ if(!isset($_COOKIE['userauth']) && $_COOKIE['userauth']!="true"){
       ?>
     <div  class="news-container">
       <div class="news-detail">
-        <h3> <?php echo $row['news.title']; ?> </h3>
-        <p><?php echo $row['news.introduction']; ?> </p>
+        <h3> <?php echo $row['title']; ?> </h3>
+        <p><?php echo $row['introduction']; ?> </p>
         <a href="fullnews.php">Read More</a>
       </div>
       <div>
-        <img style="height:100px; width:170px;" src="../images/<?php echo $row['news_image.imagename']; ?>" alt="News Image >
+        <img style="height:100px; width:170px;" src="../admin/newsimage/<?php echo $row['imagename']; ?>" alt="News Image" >
       </div>
     </div>
 
