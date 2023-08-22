@@ -101,6 +101,9 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     <input type="text" name="address" id="address" placeholder="Address" required>
   </div>
   <div class="field">
+    <input type="text" name="gender" id="gender" placeholder="Gender" required>
+  </div>
+  <div class="field">
     <input type="password" name="password" id="password" placeholder="Password" required>
   </div>
   <div class="field">
@@ -118,6 +121,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     var email = document.getElementById("email").value;
     var age = document.getElementById("age").value;
     var address = document.getElementById("address").value;
+    var gender = document.getElementById("gender").value;
     var password = document.getElementById("password").value;
     var cpassword = document.getElementById("cpassword").value;
 

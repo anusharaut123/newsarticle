@@ -39,7 +39,7 @@ if(!isset($_COOKIE['auth']) && $_COOKIE['auth']!="admintrue"){
         <div class="news-detail">
           <h3>News Title</h3>
           <p>News content goes here.</p>
-          <a href="fullnews.php">Read More</a>
+          <a href="adminfullnews.php">Read More</a>
         </div>
         <div>
           <img style="height:100px; width:170px;" src="../images/download.jpg" alt="News Image">
@@ -50,12 +50,13 @@ if(!isset($_COOKIE['auth']) && $_COOKIE['auth']!="admintrue"){
         <div class="news-detail">
           <h3>News Title</h3>
           <p>News content goes here.</p>
-          <a href="#">Read More</a>
+          <a href="adminfullnews.php">Read More</a>
         </div>
         <div>
           <img style="height:100px; width:170px;" src="../images/background-image.jpg" alt="News Image">
         </div>
       </div>
+      <button style="font-size: large; width:55px; background-color:crimson">Delete</button>
     </div>
   </div>
 
