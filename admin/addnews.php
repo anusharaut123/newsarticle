@@ -17,38 +17,46 @@ require "validatenews.php";
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
  
 </head>
-
 <body>
   <div classname="sidebar col-md-4 mx-5 " >
     <?php include 'sidebar.php'; ?>
-  </div>
-
- 
+  </div> 
     <div classname="newsbody col-md-4" style="margin-left: 540px; margin-right:680px; margin-top:80px; background-color:pink; ">
       <form action="#" method="POST" enctype="multipart/form-data"  style="  background-color:pink; width: 580px; padding:30px;">
         <h1>Add News</h1>
         <hr style="color: black;">
         <label for="category">Categories:</label>
-        <select id="category" name="category">
-          <option value=7>Entertainment</option>
-          <option value=6>Sports</option>
-          <option value=5>Bussiness</option>
+          <select id="category" name="category">
+        <?php
+            $query = "SELECT * FROM category";
+            $result = mysqli_query($conn, $query);
+            $data = mysqli_num_rows($result);
+            if ($data > 0) {
+                while ($row = mysqli_fetch_array($result)) {
+                  if($row['state'] != 'block'){
+          ?>
+                    <option value=<?php echo $row['categoryid']; ?>><?php echo $row['categoryname']; ?></option>
+          <?php
+                  }
+                }
+            }
+          ?>
         </select>
 
         <div class="form-group">
-          <label for="author">Author Name:</label>
+          <label for="author">Author Name: <?php if(isset($authorerror)) echo $authorerror; ?></label>
           <input type="text" class="form-control" name="author" id="author">
         </div>
         <div class="form-group">
-          <label for="title">Title:</label>
+          <label for="title">Title: <?php if(isset($titleerror)) echo $titleerror; ?></label>
           <input type="text" class="form-control" name="title" id="title">
         </div>
         <div class="form-group">
-          <label for="introduction">Short description:</label>
+          <label for="introduction">Short description: <?php if(isset($shortdescriptionerror)) echo $shortdescriptionerror; ?></label>
           <textarea class="form-control" name="shortdescription" id="shortdescripttion"></textarea>
         </div>
         <div class="category-image">
-          <label for="image">Image</label>
+          <label for="image">Image <?php if(isset($imageerror)) echo $imageerror; ?></label>
           <br>
           <br>
           
@@ -59,7 +67,7 @@ require "validatenews.php";
           <ul id="image-list"></ul>
           <div id="image-container"></div>
         </div>
-        <label for="description">Description:</label>
+        <label for="description">Description: <?php if(isset($descriptionerror)) echo $descriptionerror; ?></label>
         <textarea class="form-control" rows="5" name="description" id="description"></textarea>
 
         <input type="submit" name="newssubmit" class="btn btn-primary" value="Add News">

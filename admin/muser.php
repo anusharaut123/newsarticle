@@ -5,6 +5,27 @@ if(!isset($_COOKIE['auth']) && $_COOKIE['auth']!="admintrue"){
   header('location: admin_login.php');
 }
 
+if ($_SERVER["REQUEST_METHOD"] == "GET") {
+    if(isset($_GET['userid']) && $_GET['state']) {
+        $userid = $_GET['userid'];
+        if($_GET['state']== "none"){
+            $state = "block";
+        }else if($_GET['state']== "block"){
+            $state = "none";
+        }else{
+            exit;
+        }
+        $query = "UPDATE userdata set state='$state' WHERE id = '$userid'";
+        if (mysqli_query($conn, $query)) {
+            echo '<script>alert("successful")</script>';
+            header('Location: muser.php');
+        } else {
+            echo "error";
+        }
+        
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -90,7 +111,9 @@ if(!isset($_COOKIE['auth']) && $_COOKIE['auth']!="admintrue"){
             <td> <?php echo $row['age']; ?> </td>
             <td> <?php echo $row['address']; ?> </td>
             <td> <?php echo $row['gender']; ?> </td>
-            <td><button>Delete</button></td>
+            <td><a href="muser.php?userid=<?php echo $row['id'].'&state='.$row['state'] ?>">
+                <button style="background-color: <?php echo $row['state']=='block' ? '#dc3545' : 'green'; ?>">Block</button>
+            </a></td>
         </tr>
         <?php
             }

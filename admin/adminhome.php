@@ -35,28 +35,27 @@ if(!isset($_COOKIE['auth']) && $_COOKIE['auth']!="admintrue"){
     <div class="wrap">
     <div class="body">
       <h2>Latest News</h2>
+      <?php
+            $query = "SELECT news.newsid as newsid, news.title as title, news.introduction as introduction, news_image.imagename as imagename FROM news join news_image on news.newsid=news_image.newsid";
+            $result = mysqli_query($conn, $query);
+            $data = mysqli_num_rows($result);
+            if ($data > 0) {
+                while ($row = mysqli_fetch_array($result)) {
+      ?>
       <div  class="news-container">
         <div class="news-detail">
-          <h3>News Title</h3>
-          <p>News content goes here.</p>
-          <a href="adminfullnews.php">Read More</a>
+          <h3><?php echo $row['title']; ?></h3>
+          <p><?php echo $row['introduction']; ?></p>
+          <a href="fullnews.php">Read More</a>
         </div>
         <div>
-          <img style="height:100px; width:170px;" src="../images/download.jpg" alt="News Image">
+          <img style="height:100px; width:170px;" src="newsimage/<?php echo $row['imagename']; ?>" alt="News Image">
         </div>
       </div>
-
-      <div class="news-container">
-        <div class="news-detail">
-          <h3>News Title</h3>
-          <p>News content goes here.</p>
-          <a href="adminfullnews.php">Read More</a>
-        </div>
-        <div>
-          <img style="height:100px; width:170px;" src="../images/background-image.jpg" alt="News Image">
-        </div>
-      </div>
-      <button style="font-size: large; width:55px; background-color:crimson">Delete</button>
+      <?php
+                }
+              }
+      ?>
     </div>
   </div>
 

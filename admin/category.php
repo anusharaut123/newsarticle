@@ -3,19 +3,45 @@ require_once "../db/connection.php";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['submit'])) {
         $categoryname = $_POST['cname'];
+
+        if (empty($categoryname)) {
+            echo '<script>alert("Category name cannot be empty")</script>';
+        } else {
+
         $sql = "INSERT INTO category (categoryname) VALUES ('$categoryname')";
-        echo $categoryname;
         if (mysqli_query($conn, $sql)) {
-            echo " data stored";
+            unset($_POST);
+            echo '<script>alert("successfully inserted")</script>';
+            header("Refresh: 0");
         } else {
             echo "error";
         }
     }
 }
+}
+if ($_SERVER["REQUEST_METHOD"] == "GET") {
+    if(isset($_GET['categoryid']) && $_GET['state']) {
+        $categoryid = $_GET['categoryid'];
+        if($_GET['state']== "none"){
+            $state = "block";
+        }else if($_GET['state']== "block"){
+            $state = "none";
+        }else{
+            exit;
+        }
+        $query = "UPDATE category set state='$state' WHERE categoryid = '$categoryid'";
+        if (mysqli_query($conn, $query)) {
+            echo '<script>alert("successful")</script>';
+            header('Location: category.php');
+        } else {
+            echo "error";
+        }
+        
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -75,7 +101,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <tr>
                         <td> <?php echo $row['categoryid']; ?> </td>
                         <td> <?php echo $row['categoryname']; ?> </td>
-                        <td><button>Delete</button></td>
+                        <td>
+                            <a href="category.php?categoryid=<?php echo $row['categoryid'].'&state='.$row['state'] ?>"><button style="background-color: <?php echo $row['state']=='block' ? 'red' : 'lightgreen'; ?>">Block</button></a></td>
                     </tr>
             <?php
                 }
@@ -84,7 +111,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </table>
     </div>
     </div>
-
+<?php echo "cat"; ?>
 </body>
 
 </html>
