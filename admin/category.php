@@ -3,6 +3,11 @@ require_once "../db/connection.php";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['submit'])) {
         $categoryname = $_POST['cname'];
+
+        if (empty($categoryname)) {
+            echo '<script>alert("Category name cannot be empty")</script>';
+        } else {
+
         $sql = "INSERT INTO category (categoryname) VALUES ('$categoryname')";
         if (mysqli_query($conn, $sql)) {
             unset($_POST);
@@ -12,6 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "error";
         }
     }
+}
 }
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     if(isset($_GET['categoryid']) && $_GET['state']) {

@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once "../db/connection.php";
+
 if($_SERVER["REQUEST_METHOD"]=="POST"){
     if(isset($_POST['signup'])){
         $email=$_POST['email'];
@@ -10,46 +11,73 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         $gender=$_POST['gender'];
         $password=$_POST['password'];
         $cpassword=$_POST['cpassword'];
-        
-        $validate=true;
-        if($password!=$cpassword){
-            $validate=false;
-        }
-        if($validate){
-            $query= "INSERT INTO userdata (name, email, age, address, gender, password) VALUES ('$username','$email', '$age', '$address', '$gender', '$password')";
-            $execute=mysqli_query($conn, $query);
-            if($execute){
-                header("Refresh:0");
-            }else{
-                echo "Not executed";
-            }
-        }
+        if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+          $signupErrors['email'] = "Invalid email address";
+      }
 
-    }
+      if (empty($username)) {
+          $signupErrors['username'] = "Username is required";
+      }
 
-   
+      if (empty($password) || strlen($password) < 6) {
+          $signupErrors['password'] = "Password must be at least 6 characters";
+      } elseif ($password != $cpassword) {
+          $signupErrors['cpassword'] = "Passwords do not match";
+      }
+
+      if (count($signupErrors) == 0) {
+          // If there are no validation errors, proceed with database insertion
+          $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+          $query = "INSERT INTO userdata (name, email, age, address, gender, password) VALUES ('$username', '$email', '$age', '$address', '$gender', '$hashedPassword')";
+          $execute = mysqli_query($conn, $query);
+          if ($execute) {
+              header("Refresh:0");
+          } else {
+              echo "Not executed";
+          }
+      }
+  }
     if(isset($_POST['login'])){
         $email=$_POST['email'];
         $password=$_POST['password'];
-        $query="SELECT id, name, email, age, address, gender, password from userdata WHERE email='$email' AND password='$password' LIMIT 1";
-        $execute=mysqli_query($conn, $query);
-        $data=mysqli_fetch_array($execute);
-        if($data['email']==$email && $data['password']==$password){
-            $_SESSION['userid']=$data['id'];
-            $_SESSION['username']=$data['name'];
-            $_SESSION['useremail']=$data['email'];
-            $_SESSION['userage']=$data['age'];
-            $_SESSION['useraddress']=$data['address'];
-            $_SESSION['usergender']=$data['gender'];
-            $_SESSION['usersessionid']=session_id();
-            setcookie('userauth','true', time()+18000);
-            header('location: myprofile.php');
-            
-        }
-       
+
+        if (empty($email) || empty($password)) {
+          $error = "Both email and password are required.";
+      } else {
+          // Sanitize input data
+          $email = mysqli_real_escape_string($conn, $email);
+          $password = mysqli_real_escape_string($conn, $password);
+  
+          // Fetch user data using prepared statement
+          $query = "SELECT id, name, email, age, address, gender, password FROM userdata WHERE email=? LIMIT 1";
+          $stmt = mysqli_prepare($conn, $query);
+          mysqli_stmt_bind_param($stmt, "s", $email);
+          mysqli_stmt_execute($stmt);
+          $result = mysqli_stmt_get_result($stmt);
+  
+          if ($row = mysqli_fetch_assoc($result)) {
+              // Verify password
+              if ($password==$row['password']) {
+                  $_SESSION['userid'] = $row['id'];
+                  $_SESSION['username'] = $row['name'];
+                  $_SESSION['useremail'] = $row['email'];
+                  $_SESSION['userage'] = $row['age'];
+                  $_SESSION['useraddress'] = $row['address'];
+                  $_SESSION['usergender'] = $row['gender'];
+                  $_SESSION['usersessionid'] = session_id();
+                  setcookie('userauth', 'true', time() + 18000);
+                  header('location: myprofile.php');
+                  exit();
+              } else {
+                  $error = "Invalid email or password.";
+              }
+          } else {
+              $error = "Invalid email or password.";
+          }
+      }
+  }
 }
-}
-?>
+  ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -85,78 +113,53 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
               <div class="btn-layer"></div>
               <input type="submit" name="login" value="Login">
             </div>
+            <?php if (isset($error)) : ?>
+                    <div class="error-message"><?php echo $error; ?></div>
+                <?php endif; ?>
             <div class="signup-link">Not a member? <a href="">Signup now</a></div>
-          </form>
-          <form action="#" class="signup" method="post" onsubmit="return validateForm()">
-  <div class="field">
-    <input type="text" name="username" id="username" placeholder="Name" required>
+        </form>
+        
+        <form action="#" class="signup" method="post" onsubmit="return validateForm()">
+        <div class="field">
+          <input type="text" name="username" id="username" placeholder="Username" required>
+          <?php if (isset($signupErrors['username'])) { ?>
+          <p class="error"><?php echo $signupErrors['username']; ?></p>
+          <?php } ?>
+        </div>
+        <div class="field">
+        <input type="email" name="email" id="email" placeholder="Email" required>
+          <?php if (isset($signupErrors['email'])) { ?>
+          <p class="error"><?php echo $signupErrors['email']; ?></p>
+          <?php } ?>
+        </div>
+        <div class="field">
+          <input type="text" name="age" id="age" placeholder="Age" required>
+        </div>
+        <div class="field">
+          <input type="text" name="address" id="address" placeholder="Address" required>
+        </div>
+        <div class="field">
+          <input type="text" name="gender" id="gender" placeholder="Gender" required>
+        </div>
+        <div class="field">
+          <input type="password" name="cpassword" placeholder="Confirm Password" required>
+          <?php if (isset($signupErrors['cpassword'])) { ?>
+          <p class="error"><?php echo $signupErrors['cpassword']; ?></p>
+          <?php } ?>
+        </div>
+        <div class="field">
+          <input type="password" name="cpassword" id="cpassword" placeholder="Confirm password" required>
+        </div>
+        <div class="field btn">
+          <div class="btn-layer"></div>
+          <input type="submit" name="signup" value="Signup">
+        </div>
+      </form>
+    </div>
   </div>
-  <div class="field">
-    <input type="text" name="email" id="email" placeholder="Email" required>
-  </div>
-  <div class="field">
-    <input type="text" name="age" id="age" placeholder="Age" required>
-  </div>
-  <div class="field">
-    <input type="text" name="address" id="address" placeholder="Address" required>
-  </div>
-  <div class="field">
-    <input type="password" name="password" id="password" placeholder="Password" required>
-  </div>
-  <div class="field">
-    <input type="password" name="cpassword" id="cpassword" placeholder="Confirm password" required>
-  </div>
-  <div class="field btn">
-    <div class="btn-layer"></div>
-    <input type="submit" name="signup" value="Signup">
-  </div>
-</form>
+</div>
 
 <script>
-  function validateForm() {
-    var username = document.getElementById("username").value;
-    var email = document.getElementById("email").value;
-    var age = document.getElementById("age").value;
-    var address = document.getElementById("address").value;
-    var password = document.getElementById("password").value;
-    var cpassword = document.getElementById("cpassword").value;
-
-    if (!/^[A-Z][a-zA-Z]*$/.test(username)) {
-      alert("Name should start with a capital letter");
-      return false;
-    }
-
-    if (!email.includes("@")) {
-      alert("Email should contain the @ symbol");
-      return false;
-    }
-
-    if (!/^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()])[A-Za-z\d!@#$%^&*()]+$/.test(password)) {
-      alert("Password should contain at least one capital letter, one special character, and one number");
-      return false;
-    }
-
-    if (password !== cpassword) {
-      alert("Password and confirm password should match");
-      return false;
-    }
-
-    if (!/^\d+$/.test(age)) {
-      alert("Age should contain only numbers");
-      return false;
-    }
-
-    // Additional validation logic if needed
-
-    return true; // Submit the form if all validation passes
-  }
-</script>
-
-        </div>
-      </div>
-    </div>
-
-  <script>
       const loginText = document.querySelector(".title-text .login");
       const loginForm = document.querySelector("form.login");
       const loginBtn = document.querySelector("label.login");
