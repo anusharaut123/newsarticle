@@ -30,7 +30,7 @@ if(!isset($_COOKIE['userauth']) && $_COOKIE['userauth']!="true"){
     <h1>News Website</h1>
     <nav>
       <ul>
-        <li><a href="news.php">Home</a></li>
+        <li><a href="renews.php">Home</a></li>
         <li><a href="business.php">Business</a></li>
         <li><a href="sport.php">Sports</a></li>
         <li><a href="entertainment.php">Entertainment</a></li>

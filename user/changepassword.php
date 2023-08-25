@@ -1,4 +1,36 @@
-<!DOCTYPE html>
+<?php
+session_start();
+require "../db/connection.php";
+if ($_SERVER["REQUEST_METHOD"] == "POST"){
+    if (isset($_POST['submit'])) {
+        if (isset($_POST['opwd']) &&
+        isset($_POST['npwd']) &&
+        isset($_POST['cpwd'])) {
+            $oldPassword = $_POST['opwd'];
+            $newPassword = $_POST['npwd'];
+            $confirmPassword = $_POST['cpwd'];
+
+            if ($newPassword == $confirmPassword) {
+                $hashedPassword = md5($oldPassword);
+                $userid=$_SESSION['userid'];
+                $query = "SELECT password FROM userdata WHERE id='$userid' LIMIT 1";
+                $result = mysqli_query($conn, $query);
+                $newPassword=md5($newPassword);
+
+                if ($row = mysqli_fetch_assoc($result)) {
+                    // Verify password
+                    if ($hashedPassword==$row['password']) {
+                        $sql="UPDATE userdata SET password='$newPassword' WHERE id='$userid'";
+                        mysqli_query($conn, $sql);
+                    }
+                }
+            }
+        }
+    }
+}
+?>
+
+    <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -18,7 +50,7 @@
           <li><a href="editprofile.php">Edit profile</a></li>
           <li><a href="changepassword.php">Change Password</a></li>
           <li><a href="delete.php">Delete</a></li>
-          <li><a href="news.php">News</a></li>
+          <li><a href="renews.php">News</a></li>
           <li><a href="userlogout.php">Log out</a></li>
           
         </ul>
