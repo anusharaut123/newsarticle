@@ -11,6 +11,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
         $gender=$_POST['gender'];
         $password=$_POST['password'];
         $cpassword=$_POST['cpassword'];
+        $signupErrors = null;
         if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
           $signupErrors['email'] = "Invalid email address";
       }
@@ -25,9 +26,9 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
           $signupErrors['cpassword'] = "Passwords do not match";
       }
 
-      if (count($signupErrors) == 0) {
+      if ($signupErrors == null) {
           // If there are no validation errors, proceed with database insertion
-          $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+          $hashedPassword = md5($password);
           $query = "INSERT INTO userdata (name, email, age, address, gender, password) VALUES ('$username', '$email', '$age', '$address', '$gender', '$hashedPassword')";
           $execute = mysqli_query($conn, $query);
           if ($execute) {
@@ -40,24 +41,19 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     if(isset($_POST['login'])){
         $email=$_POST['email'];
         $password=$_POST['password'];
-
+ 
         if (empty($email) || empty($password)) {
           $error = "Both email and password are required.";
       } else {
           // Sanitize input data
-          $email = mysqli_real_escape_string($conn, $email);
-          $password = mysqli_real_escape_string($conn, $password);
-  
-          // Fetch user data using prepared statement
-          $query = "SELECT id, name, email, age, address, gender, password FROM userdata WHERE email=? LIMIT 1";
-          $stmt = mysqli_prepare($conn, $query);
-          mysqli_stmt_bind_param($stmt, "s", $email);
-          mysqli_stmt_execute($stmt);
-          $result = mysqli_stmt_get_result($stmt);
+          
+          $hashedPassword = md5($password);
+          $query = "SELECT id, name, email, age, address, gender, password, state FROM userdata WHERE email='$email' LIMIT 1";
+          $result = mysqli_query($conn, $query);
   
           if ($row = mysqli_fetch_assoc($result)) {
               // Verify password
-              if ($password==$row['password']) {
+              if ($hashedPassword==$row['password'] && $row['state'] != 'block') {
                   $_SESSION['userid'] = $row['id'];
                   $_SESSION['username'] = $row['name'];
                   $_SESSION['useremail'] = $row['email'];
@@ -69,7 +65,8 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
                   header('location: myprofile.php');
                   exit();
               } else {
-                  $error = "Invalid email or password.";
+                  $error = "Invalid email or password1.";
+                  echo $hashedPassword.'::'.$row['password'];
               }
           } else {
               $error = "Invalid email or password.";
@@ -142,7 +139,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
           <input type="text" name="gender" id="gender" placeholder="Gender" required>
         </div>
         <div class="field">
-          <input type="password" name="cpassword" placeholder="Confirm Password" required>
+          <input type="password" name="password" placeholder="Enter Password" required>
           <?php if (isset($signupErrors['cpassword'])) { ?>
           <p class="error"><?php echo $signupErrors['cpassword']; ?></p>
           <?php } ?>

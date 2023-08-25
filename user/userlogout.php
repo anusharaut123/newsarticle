@@ -6,6 +6,6 @@ if(!isset($_COOKIE['userauth']) && $_COOKIE['userauth']!="true"){
 
 session_unset();
 session_destroy();
-setcookie ('auth',null,time()-90000,'/newsarticle',''); 
+setcookie ('userauth',null,time()-90000); 
 header('location: ../index.php');
 ?>
