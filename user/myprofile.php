@@ -23,7 +23,7 @@ require "../db/connection.php";
           <li><a href="editprofile.php">Edit profile</a></li>
           <li><a href="changepassword.php">Change Password</a></li>
           <li><a href="delete.php">Delete</a></li>
-          <li><a href="news.php">News</a></li>
+          <li><a href="renews.php">News</a></li>
           <li><a href="userlogout.php">Log out</a></li>
           
         </ul>

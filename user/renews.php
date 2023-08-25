@@ -19,7 +19,7 @@
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
     
     <!-- Design fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
 
     <!-- Bootstrap core CSS -->
     <link href="../style/version/bootstrap.css" rel="stylesheet">
@@ -48,55 +48,54 @@
 <body>
 
     <div id="wrapper">
-        <header class="tech-header header">
-            <div class="container-fluid">
-                <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
-                    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <a class="navbar-brand" href="tech-index.html"><img src="images/version/tech-logo.png" alt=""></a>
-                    <div class="collapse navbar-collapse" id="navbarCollapse">
-                        <ul class="navbar-nav mr-auto">
-                            <li class="nav-item">
-                                <a class="nav-link" href="tech-index.html">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="tech-category-01.html">Business</a>
-                            </li>                   
-                            <li class="nav-item">
-                                <a class="nav-link" href="tech-category-02.html">Sports</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="tech-category-03.html">Entertainment</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="tech-category-03.html">Education</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="tech-category-03.html">Sanish</a>
-                            </li>
-
-                            <li class="nav-item">
-                            <select name="category" id="category">
-                                <option name="fashion" value="fashion">Fashion</option>
-                                <option name="politics" value="politics">Politics</option>
-                                <option name="economy" value="economy">Economy</option>
-                                <option name="health" value="health">Health</option>
-                            </select>
-                            </li>
-                    </ul>
-                    <ul class="navbar-nav mr-2">
-                        <li class="nav-item">
-                            <a class="nav-link" href="tech-category-02.html">Profile</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="tech-category-03.html">Logout</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </div><!-- end container-fluid -->
-    </header><!-- end market-header -->
+    <header class="tech-header header">
+    <div class="container-fluid">
+        <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="tech-index.html"><img src="images/version/tech-logo.png" alt=""></a>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="tech-index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="tech-category-01.html">Business</a>
+                    </li>                   
+                    <li class="nav-item">
+                        <a class="nav-link" href="tech-category-02.html">Sports</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="tech-category-03.html">Entertainment</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="tech-category-03.html">Education</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="tech-category-03.html">Sanish</a>
+                    </li>
+                    <li class="nav-item">
+                        <select name="category" id="category" class="form-control">
+                            <option name="fashion" value="fashion">Fashion</option>
+                            <option name="politics" value="politics">Politics</option>
+                            <option name="economy" value="economy">Economy</option>
+                            <option name="health" value="health">Health</option>
+                        </select>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="userprofile.php">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="userlogout.php">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div><!-- end container-fluid -->
+</header>
 
         <section class="section first-section">
             <div class="container-fluid">
@@ -119,7 +118,7 @@
 
                     <div class="second-slot">
                         <div class="masonry-box post-media">
-                             <img src="../images/business-news-vector-1227754.jpg" alt="" class="img-fluid">
+                             <img src="../images/download.jpg" alt="" class="img-fluid">
                              <div class="shadoweffect">
                                 <div class="shadow-desc">
                                     <div class="blog-meta">
