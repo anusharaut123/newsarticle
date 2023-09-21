@@ -1,3 +1,35 @@
+<?php
+session_start();
+require "../db/connection.php";
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+  if (isset($_POST['submit'])){
+      $password = $_POST['password'];
+      $userid = $_SESSION['userid'];
+
+      if (empty($password)) {
+          echo "Password field is required.";
+          exit;
+      }
+
+      $query = "SELECT password FROM userdata WHERE id='$userid' AND password='$password' LIMIT 1";
+      $result = mysqli_query($conn, $query);
+
+      if (mysqli_num_rows($result) == 1) {
+          $row = mysqli_fetch_assoc($result);
+
+          $sql = "DELETE FROM userdata WHERE id='$userid'";
+          if (mysqli_query($conn, $sql)) {
+              echo "User deleted successfully";
+          } else {
+              echo "Error deleting record: " . mysqli_error($conn);
+          }
+      } else {
+          echo "Invalid password";
+      }
+  }
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,16 +55,12 @@
     </div>
     </div>
   </div>
-  <h1>Delete Account</h1>
-  <div class="form-group">
-  <label for="cname">Name:</label><br>
-  <input type="text" id="cname" name="cname"><br>
-  </div>
-  <p>Are you sure you want to delete your account? </p>
-  
-  <form action="/delete-account" method="post">
-    <button type="submit">Delete Account</button>
-  </form>
+  <h2>Delete Your Account</h2>
+    <form action="#" method="post">    
+        <label for="password">Password:</label>
+        <input type="text" id="password" name="password" required><br><br>
+        <input type="submit" value="Delete Account">
+    </form>
   
 </body>
 </html>
