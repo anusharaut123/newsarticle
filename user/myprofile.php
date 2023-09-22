@@ -32,11 +32,6 @@ require "../db/connection.php";
   </div>
   <div class="container">
     <h2>My Profile</h2>
-<div style="background-image: url('images');
-  background-size: cover; height: 100px;">
-<img src="../images/pexels-pixabay-268533.jpg" style="height:100px;">
-</div>
-
 <div class="form-group">
   <p>User Name: <?php echo $_SESSION['username'] ?></p>
 </div>

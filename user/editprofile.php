@@ -1,6 +1,28 @@
 <?php
 session_start();
 require "../db/connection.php";
+if (!isset($_SESSION['userid'])) {
+  // Redirect to the login page or handle unauthorized access as needed
+  header("Location: login.php");
+  exit();
+}
+
+$userid = $_SESSION['userid'];
+
+// Fetch user data from the database
+$sql = "SELECT name, email, age, gender FROM userdata WHERE id='$userid'";
+$result = mysqli_query($conn, $sql);
+
+if ($result) {
+  $userData = mysqli_fetch_assoc($result);
+  $name = $userData['name'];
+  $email = $userData['email'];
+  $age = $userData['age'];
+  $gender = $userData['gender'];
+} else {
+  // Handle the error if the query fails
+  echo '<script> alert("Error fetching user data.") </script>';
+}
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   if (isset($_POST['submit'])) {
     if (isset($_POST['fname']) &&
@@ -55,33 +77,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   <div class="container">
   <form action="#" method="POST">
     <h2>Edit Profile</h2>
-    <label for="image">Upload Image:</label>
-    <input type="file" id="image" name="image">
-
     <div class="form-group">
       <label for="fname">Name:</label><br>
-      <input type="text" id="fname" name="fname"><br>
+      <input type="text" id="fname" value="<?php echo $name; ?>" name="fname"><br>
     </div>
 
     <div class="form-group">
       <label for="email">Email:</label><br>
-      <input type="text" id="email" name="email"><br>
+      <input type="text" id="email" value="<?php echo $email; ?>" name="email"><br>
     </div>
 
     <div class="form-group">
       <label for="age">Age:</label><br>
-      <input type="text" id="age" name="age"><br>
+      <input type="text" id="age" value="<?php echo $age; ?>" name="age"><br>
     </div>
 
     <label for="gender">Gender:</label>
     <div class="gender-options">
-      <input type="radio" id="male" name="gender" value="Male">
+      <input type="radio" id="male" name="gender" value="Male" <?php if ($gender == "Male") echo "checked"; ?>>
       <label for="male">Male</label>
 
-      <input type="radio" id="female" name="gender" value="Female">
+      <input type="radio" id="female" name="gender" value="Female" <?php if ($gender == "Female") echo "checked"; ?>>
       <label for="female">Female</label>
 
-      <input type="radio" id="other" name="gender" value="Other">
+      <input type="radio" id="other" name="gender" value="Other" <?php if ($gender == "Other") echo "checked"; ?>>
       <label for="other">Other</label>
     </div>
     <br>
