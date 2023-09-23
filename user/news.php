@@ -5,6 +5,7 @@ if(!isset($_COOKIE['userauth']) && $_COOKIE['userauth']!="true"){
   header('location: ../index.php');
 
 }
+$category=$_GET['category'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -30,10 +31,16 @@ if(!isset($_COOKIE['userauth']) && $_COOKIE['userauth']!="true"){
     <h1>News Website</h1>
     <nav>
       <ul>
-        <li><a href="renews.php">Home</a></li>
-        <li><a href="business.php">Business</a></li>
-        <li><a href="sport.php">Sports</a></li>
-        <li><a href="entertainment.php">Entertainment</a></li>
+      <li><a href="renews.php">Home</a></li>
+      <?php
+            $query = "SELECT * FROM category";
+            $result = mysqli_query($conn, $query);
+            if ($result) {
+                while ($row = mysqli_fetch_array($result)) {
+                    echo '<li><a href="news.php?category=' . $row['categoryid'] . '">' . $row['categoryname'] . '</a></li>';
+                }
+            }
+            ?>
         <li><a href="userprofile.php">Profile</a></li>
         <li><a href="userlogout.php">Logout</a></li>
       </ul>
@@ -42,7 +49,7 @@ if(!isset($_COOKIE['userauth']) && $_COOKIE['userauth']!="true"){
 <div>
     <h2>Latest News</h2>
     <?php
-      $query="SELECT news.newsid as newsid, news.category as category, news.authorname as authorname, news.title as title, news.introduction as introduction, news.description as description, news_image.imageid as imageid, news_image.newsid as newsid, news_image.imagename as imagename FROM news join news_image on news.newsid=news_image.newsid";
+      $query="SELECT news.newsid as newsid, news.category as category, news.authorname as authorname, news.title as title, news.introduction as introduction, news.description as description, news_image.imageid as imageid, news_image.newsid as newsid, news_image.imagename as imagename FROM news join news_image on news.newsid=news_image.newsid WHERE news.category='$category'";
       $result=mysqli_query($conn, $query);
       $data= mysqli_num_rows($result);
       if($data>0){
