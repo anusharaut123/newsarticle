@@ -9,7 +9,7 @@ require "../db/connection.php";
         $username=$_SESSION['username'];
         $comment=$_POST['comment'];
         unset($_POST);
-        $sql = "INSERT INTO comments (userid, newsid, username, comment) VALUES ('$userid', '$newsid', '$username', '$comment')";
+        $sql = "INSERT INTO comments (userid, newsid, name, comment) VALUES ('$userid', '$newsid', '$username', '$comment')";
         if(mysqli_query($conn, $sql)){ 
           echo "Comment added successfully.";
         } else {
@@ -123,13 +123,13 @@ $newsdata = mysqli_fetch_array($newsresult);
       </form>
     </div>
     <?php
-      $sql = "SELECT username, comment FROM comments";
+      $sql = "SELECT name, comment FROM comments";
       $result=mysqli_query($conn, $sql);
       $data= mysqli_num_rows($result);
       if($data>0){
           while($row=mysqli_fetch_array($result)){
             echo '<div class="comment">';
-            echo '<h4>' . $row['username'] . '</h4>';
+            echo '<h4>' . $row['name'] . '</h4>';
             echo '<p>' . $row['comment'] . '</p>';
             echo '</div>';
         }
