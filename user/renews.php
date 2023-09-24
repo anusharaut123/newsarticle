@@ -1,4 +1,11 @@
-<!DOCTYPE html>
+<?php
+session_start();
+require "../db/connection.php";
+if(!isset($_COOKIE['userauth']) && $_COOKIE['userauth']!="true"){
+  header('location: ../index.php');
+
+}
+?><!DOCTYPE html>
 <html lang="en">
 <head>
     <!-- Basic -->
@@ -60,30 +67,30 @@
                     <li class="nav-item">
                         <a class="nav-link" href="tech-index.html">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="tech-category-01.html">Business</a>
-                    </li>                   
-                    <li class="nav-item">
-                        <a class="nav-link" href="tech-category-02.html">Sports</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="tech-category-03.html">Entertainment</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="tech-category-03.html">Education</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="tech-category-03.html">Sanish</a>
-                    </li>
-                    <li class="nav-item">
-                        <select name="category" id="category" class="form-control">
-                            <option name="fashion" value="fashion">Fashion</option>
-                            <option name="politics" value="politics">Politics</option>
-                            <option name="economy" value="economy">Economy</option>
-                            <option name="health" value="health">Health</option>
-                        </select>
-                    </li>
-                </ul>
+                    <?php
+                    $i=1;
+                $query = "SELECT * FROM category";
+                $result = mysqli_query($conn, $query);
+                if ($result) {
+                    while ($row = mysqli_fetch_array($result)) {
+                        if($i<=5){
+                         echo '<li class="nav-item"><a class="nav-link" href="news.php?category=' . $row['categoryid'] . '">' . $row['categoryname'] . '</a></li>';
+                         if($i==5) { 
+                            echo '<li class="nav-item"><select name="category" id="category" class="form-control">';
+                        }
+                        else{
+                            continue;
+                        }
+                        }
+                        else{
+                            echo '<a  href="news.php?category=' .$row['categoryid'] . '"> <option >Fashion</option> </a>';
+                        }
+
+                    }
+                    echo '</select></li>';
+                }
+    ?>
+    </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="userprofile.php">Profile</a>
