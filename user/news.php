@@ -49,7 +49,7 @@ $category=$_GET['category'];
 <div>
     <h2>Latest News</h2>
     <?php
-      $query="SELECT news.newsid as newsid, news.category as category, news.authorname as authorname, news.title as title, news.introduction as introduction, news.description as description, news_image.imageid as imageid, news_image.newsid as newsid, news_image.imagename as imagename FROM news join news_image on news.newsid=news_image.newsid WHERE news.category='$category'";
+      $query="SELECT news.newsid as newsid, news.category as category, news.authorname as authorname, news.title as title, news.introduction as introduction, news.description as description, news_image.imageid as imageid, news_image.newsid as newsid, news_image.imagename as imagename FROM news join news_image on news.newsid=news_image.newsid";
       $result=mysqli_query($conn, $query);
       $data= mysqli_num_rows($result);
       if($data>0){
