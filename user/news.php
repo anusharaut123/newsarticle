@@ -33,7 +33,7 @@ $category=$_GET['category'];
       <ul>
       <li><a href="renews.php">Home</a></li>
       <?php
-            $query = "SELECT * FROM category";
+            $query = "SELECT * FROM category WHERE state != 'block'";
             $result = mysqli_query($conn, $query);
             if ($result) {
                 while ($row = mysqli_fetch_array($result)) {
