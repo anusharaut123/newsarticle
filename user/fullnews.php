@@ -17,83 +17,125 @@ require "../db/connection.php";
         }
       }
   }
-$query = "SELECT * FROM news WHERE newsid='$newsid' LIMIt 1";
-$newsresult = mysqli_query($conn, $query);
-$newsdata = mysqli_fetch_array($newsresult);
-
+  $query = "SELECT * FROM news WHERE newsid='$newsid' LIMIt 1";
+  $newsresult = mysqli_query($conn, $query);
+  $newsdata = mysqli_fetch_array($newsresult);
+  $newsViews=$newsdata['views'];
+  $view=intval($newsViews)+1;
+  $updateQuery = "UPDATE news SET views='$view' WHERE newsid='$newsid'";
+  mysqli_query($conn, $updateQuery);
 ?>
 <!DOCTYPE html>
 <html>
 <head>
   <title>News Article</title>
+  <link rel="stylesheet" href="../style/stylee.css"> 
   <style>
     /* CSS styles for the news article */
-    .article {
-      margin-bottom: 20px;
-      border: 1px solid #ccc;
-      padding: 10px;
-    }
+.article {
+  margin-bottom: 30px;
+  border: 1px solid #ddd;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
-    .title {
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
+}
 
-    .author {
-      font-size: 14px;
-      color: #888;
-    }
+.author {
+  font-size: 16px;
+  color: #888;
+  margin-bottom: 10px;
+}
 
-    .date {
-      font-size: 14px;
-      color: #888;
-      margin-bottom: 5px;
-    }
+.date {
+  font-size: 16px;
+  color: #888;
+  margin-bottom: 15px;
+}
 
-    .content {
-      margin-top: 10px;
-    }
+.content {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-top: 20px;
+  color: #444;
+}
 
-    .image {
-      max-width: 100%;
-      margin-bottom: 10px;
-    }
+.image {
+  max-width: 100%;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
-    .form-group {
-      margin-top: 20px;
-    }
+.form-group {
+  margin-top: 30px;
+}
 
-    label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #555;
+}
 
-    textarea {
-      width: 50%;
-      padding: 5px;
-    }
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
 
-    .btn {
-      display: inline-block;
-      padding: 8px 12px;
-      font-size: 14px;
-      font-weight: bold;
-      text-align: center;
-      text-decoration: none;
-      cursor: pointer;
-      border: none;
-      border-radius: 4px;
-    }
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease-in-out;
+}
 
-    .btn-primary {
-      color: #fff;
-      background-color: #007bff;
-    }
+.btn-primary {
+  color: #fff;
+  background-color: #007bff;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
   </style>
 </head>
-<body>
+<body>  <header>
+    <h1>News Website</h1>
+    <nav>
+      <ul>
+      <li><a href="renews.php">Home</a></li>
+      <?php
+            $query = "SELECT * FROM category WHERE state != 'block'";
+            $result = mysqli_query($conn, $query);
+            if ($result) {
+                while ($row = mysqli_fetch_array($result)) {
+                    echo '<li><a href="news.php?category=' . $row['categoryid'] . '">' . $row['categoryname'] . '</a></li>';
+                }
+            }
+            ?>
+        <li><a href="myprofile.php">Profile</a></li>
+        <li><a href="userlogout.php">Logout</a></li>
+      </ul>
+    </nav>
+  </header>
+
   <div class="article">
     <h2 class="title"><?php echo $newsdata['title']; ?></h2>
     <p class="author"><?php echo $newsdata['authorname']; ?></p>
@@ -123,7 +165,7 @@ $newsdata = mysqli_fetch_array($newsresult);
       </form>
     </div>
     <?php
-      $sql = "SELECT name, comment FROM comments";
+      $sql = "SELECT name, comment FROM comments WHERE newsid='$newsid'";
       $result=mysqli_query($conn, $sql);
       $data= mysqli_num_rows($result);
       if($data>0){

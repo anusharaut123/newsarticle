@@ -49,7 +49,7 @@ if(!isset($_COOKIE['auth']) && $_COOKIE['auth']!="admintrue"){
           <a href="adminfullnews.php?newsid=<?php echo $row['newsid'] ?>">Read More</a>
         </div>
         <div>
-          <img style="height:100px; width:170px;" src="newsimage/<?php echo $row['imagename']; ?>" alt="News Image">
+          <img style="height:100px; width:200px;" src="newsimage/<?php echo $row['imagename']; ?>" alt="News Image">
         </div>
       </div>
       <?php

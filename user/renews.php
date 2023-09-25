@@ -93,7 +93,7 @@ if(!isset($_COOKIE['userauth']) && $_COOKIE['userauth']!="true"){
     </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="userprofile.php">Profile</a>
+                        <a class="nav-link" href="myprofile.php">Profile</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="userlogout.php">Logout</a>
@@ -429,7 +429,7 @@ if(!isset($_COOKIE['userauth']) && $_COOKIE['userauth']!="true"){
                             </div><!-- end widget -->
 
                             <div class="widget">
-                                <h2 class="widget-title">Trend Videos</h2>
+                                <h2 class="widget-title">Trend News</h2>
                                 <div class="trend-videos">
                                     <div class="blog-box">
                                         <div class="post-media">

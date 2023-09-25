@@ -55,12 +55,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     </div>
     </div>
   </div>
-  <h2>Delete Your Account</h2>
-    <form action="#" method="post">    
-        <label for="password">Password:</label>
-        <input type="text" id="password" name="password" required><br><br>
-        <input type="submit" value="Delete Account">
-    </form>
-  
+  <form action="#" method="post">
+    <h2>Delete Your Account</h2>
+    <label for="password">Password:</label>
+    <input type="text" id="password" name="password" required><br><br>
+    <input type="submit" value="Delete Account">
+</form>
 </body>
 </html>

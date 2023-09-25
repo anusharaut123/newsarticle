@@ -7,56 +7,38 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
+  background-color: lightblue;
+  margin: 0;
+  padding: 0;
 }
 
 .main {
-  background-size: cover;
-  background-color: #fbf2e3;
+  background-color: white;
 }
 
 .navbar {
-  width: 1200px;
-  height: 100px;
-  margin: auto;
-}
-
-.icon {
-  width: 500px;
-  float: left;
-  height: 10px;
-
-}
-
-.menu {
-  width: 700px;
-  float: left;
-  height: 100px;
-
-  /* position: fixed; */
-
-}
-
-ul {
-  float: left;
+  background-color: #333;
+  color: white;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  padding: 10px;
 }
 
-ul li {
-  list-style: none;
-  margin-left: 62px;
-  margin-top: 27px;
-  font-size: 20px;
+.menu ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
 }
 
-ul li a {
+.menu li {
+  margin-right: 20px;
+}
+
+.menu a {
   text-decoration: none;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: bold;
-  transition: 0.4s ease-in-out;
-  color: black;
+  color: white;
 }
 
 .container {
@@ -66,7 +48,7 @@ ul li a {
 }
 
 .form-group {
-  margin-bottom: 10px;
+  margin: 10px 0;
 }
 
 .gender-options {

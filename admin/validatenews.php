@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Validate Title (only letters and numbers)
         if (!preg_match("/^[a-zA-Z0-9\s]+$/", $title)) {
-            $titleerror= "Title should contain only letters and numbers.<br>";
+            $titleerror= "Title should contain only letters.<br>";
         }
 
         // Validate Short Description and Description

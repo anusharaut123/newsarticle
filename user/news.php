@@ -41,7 +41,7 @@ $category=$_GET['category'];
                 }
             }
             ?>
-        <li><a href="userprofile.php">Profile</a></li>
+        <li><a href="myprofile.php">Profile</a></li>
         <li><a href="userlogout.php">Logout</a></li>
       </ul>
     </nav>
@@ -49,7 +49,7 @@ $category=$_GET['category'];
 <div>
     <h2>Latest News</h2>
     <?php
-      $query="SELECT news.newsid as newsid, news.category as category, news.authorname as authorname, news.title as title, news.introduction as introduction, news.description as description, news_image.imageid as imageid, news_image.newsid as newsid, news_image.imagename as imagename FROM news join news_image on news.newsid=news_image.newsid";
+      $query="SELECT news.newsid as newsid, news.category as category, news.authorname as authorname, news.title as title, news.introduction as introduction, news.description as description, (SELECT MIN(imageid) FROM news_image WHERE news.newsid = news_image.newsid) as imageid, (SELECT imagename FROM news_image WHERE imageid = (SELECT MIN(imageid) FROM news_image WHERE news.newsid = news_image.newsid)) as imagename FROM news WHERE news.category='$category';";
       $result=mysqli_query($conn, $query);
       $data= mysqli_num_rows($result);
       if($data>0){
@@ -72,8 +72,7 @@ $category=$_GET['category'];
       ?>
 
 </div>
-
-  <?php
+<?php
 include('../include/footer.php');
 ?>
 </body>
