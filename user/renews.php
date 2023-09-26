@@ -1,11 +1,12 @@
 <?php
-session_start();
-require "../db/connection.php";
-if(!isset($_COOKIE['userauth']) && $_COOKIE['userauth']!="true"){
-  header('location: ../index.php');
-
+if(isset($_COOKIE['userauth']) && $_COOKIE['userauth']=="true"){
+    require "algorithm.php"; 
+}else {
+    header('location: ../index.php');
 }
-?><!DOCTYPE html>
+
+?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <!-- Basic -->
@@ -108,15 +109,18 @@ if(!isset($_COOKIE['userauth']) && $_COOKIE['userauth']!="true"){
             <div class="container-fluid">
                 <div class="masonry-blog clearfix">
                     <div class="first-slot">
+                        <?php
+                            $firstRecommend = $recommedationResult[0];
+                        ?>
                         <div class="masonry-box post-media">
-                             <img src="../images/newspaper-template-design-vector-18862843.webp" alt="" class="img-fluid">
+                             <img src="../admin/newsimage/<?php echo $firstRecommend[8] ?>" alt="" class="img-fluid">
                              <div class="shadoweffect">
                                 <div class="shadow-desc">
                                     <div class="blog-meta">
-                                        <span class="bg-orange"><a href="tech-category-01.html" title="">Technology</a></span>
-                                        <h4><a href="tech-single.html" title="">Say hello to real handmade office furniture! Clean & beautiful design</a></h4>
-                                        <small><a href="tech-single.html" title="">24 July, 2017</a></small>
-                                        <small><a href="tech-author.html" title="">by Amanda</a></small>
+                                        <span class="bg-orange"><a href="fullnews.php?newsid=<?php echo $firstRecommend[0] ?>" title=""><?php echo $firstRecommend[9] ?></a></span>
+                                        <h4><a href="fullnews.php?newsid=<?php echo $firstRecommend[0] ?>" title=""><?php echo $firstRecommend[3] ?></a></h4>
+                                        <small><a href="fullnews.php?newsid=<?php echo $firstRecommend[0] ?>" title=""><?php echo $firstRecommend[6] ?></a></small>
+                                        <small><a href="fullnews.php?newsid=<?php echo $firstRecommend[0] ?>" title="">by <?php echo $firstRecommend[2] ?></a></small>
                                     </div><!-- end meta -->
                                 </div><!-- end shadow-desc -->
                             </div><!-- end shadow -->
@@ -124,37 +128,42 @@ if(!isset($_COOKIE['userauth']) && $_COOKIE['userauth']!="true"){
                     </div><!-- end first-side -->
 
                     <div class="second-slot">
+                        <?php
+                            $secondRecommend = $recommedationResult[1];
+                        ?>
                         <div class="masonry-box post-media">
-                             <img src="../images/download.jpg" alt="" class="img-fluid">
+                             <img src="../admin/newsimage/<?php echo $secondRecommend[8] ?>" alt="" class="img-fluid">
                              <div class="shadoweffect">
                                 <div class="shadow-desc">
                                     <div class="blog-meta">
-                                        <span class="bg-orange"><a href="tech-category-01.html" title="">Gadgets</a></span>
-                                        <h4><a href="tech-single.html" title="">Do not make mistakes when choosing web hosting</a></h4>
-                                        <small><a href="tech-single.html" title="">03 July, 2017</a></small>
-                                        <small><a href="tech-author.html" title="">by Jessica</a></small>
+                                        <span class="bg-orange"><a href="fullnews.php?newsid=<?php echo $secondRecommend[0] ?>" title=""><?php echo $secondRecommend[9] ?></a></span>
+                                        <h4><a href="fullnews.php?newsid=<?php echo $secondRecommend[0] ?>" title=""><?php echo $secondRecommend[3] ?></a></h4>
+                                        <small><a href="fullnews.php?newsid=<?php echo $secondRecommend[0] ?>" title=""><?php echo $secondRecommend[6] ?></a></small>
+                                        <small><a href="fullnews.php?newsid=<?php echo $secondRecommend[0] ?>" title="">by <?php echo $secondRecommend[2] ?></a></small>
                                     </div><!-- end meta -->
                                 </div><!-- end shadow-desc -->
-                             </div><!-- end shadow -->
+                            </div><!-- end shadow -->
                         </div><!-- end post-media -->
-                    </div><!-- end second-side -->
+                    </div><!-- end first-side -->
 
                     <div class="last-slot">
+                        <?php
+                            $lastRecommend = $recommedationResult[2];
+                        ?>
                         <div class="masonry-box post-media">
-                             <img src="../images/background-image.jpg" alt="" class="img-fluid">
+                             <img src="../admin/newsimage/<?php echo $lastRecommend[8] ?>" alt="" class="img-fluid">
                              <div class="shadoweffect">
                                 <div class="shadow-desc">
                                     <div class="blog-meta">
-                                        <span class="bg-orange"><a href="tech-category-01.html" title="">Technology</a></span>
-                                        <h4><a href="tech-single.html" title="">The most reliable Galaxy Note 8 images leaked</a></h4>
-                                        <small><a href="tech-single.html" title="">01 July, 2017</a></small>
-                                        <small><a href="tech-author.html" title="">by Jessica</a></small>
+                                        <span class="bg-orange"><a href="fullnews.php?newsid=<?php echo $lastRecommend[0] ?>" title=""><?php echo $lastRecommend[9] ?></a></span>
+                                        <h4><a href="fullnews.php?newsid=<?php echo $lastRecommend[0] ?>" title=""><?php echo $lastRecommend[3] ?></a></h4>
+                                        <small><a href="fullnews.php?newsid=<?php echo $lastRecommend[0] ?>" title=""><?php echo $lastRecommend[6] ?></a></small>
+                                        <small><a href="fullnews.php?newsid=<?php echo $lastRecommend[0] ?>" title="">by <?php echo $lastRecommend[2] ?></a></small>
                                     </div><!-- end meta -->
                                 </div><!-- end shadow-desc -->
-                             </div><!-- end shadow -->
+                            </div><!-- end shadow -->
                         </div><!-- end post-media -->
-                    </div><!-- end second-side -->
-                </div><!-- end masonry -->
+                    </div><!-- end first-side -->
             </div>
         </section>
 
@@ -168,235 +177,39 @@ if(!isset($_COOKIE['userauth']) && $_COOKIE['userauth']!="true"){
                             </div><!-- end blog-top -->
 
                             <div class="blog-list clearfix">
+                            <?php
+                            $recentQuery = "SELECT *, (SELECT imagename FROM news_image WHERE imageid = (SELECT MIN(imageid) FROM news_image WHERE news.newsid = news_image.newsid)) as imagename, (SELECT categoryname from category where news.category = category.categoryid ) as categoryname FROM news WHERE date >= NOW() - INTERVAL 7 DAY ORDER BY date DESC";
+                            $recentResult = mysqli_query($conn, $recentQuery);
+                            if($recentQuery){
+                                while($recentRow = mysqli_fetch_array($recentResult)){
+                            ?>
+
                                 <div class="blog-box row">
                                     <div class="col-md-4">
                                         <div class="post-media">
-                                            <a href="tech-single.html" title="">
-                                                <img src="upload/tech_blog_01.jpg" alt="" class="img-fluid">
+                                            <a href="fullnews.php?newsid=<?php echo $recentRow['newsid'] ?>" title="">
+                                                <img src="../admin/newsimage/<?php echo $recentRow['imagename'] ?>" alt="" class="img-fluid">
                                                 <div class="hovereffect"></div>
                                             </a>
                                         </div><!-- end media -->
                                     </div><!-- end col -->
 
                                     <div class="blog-meta big-meta col-md-8">
-                                        <h4><a href="tech-single.html" title="">Top 10 phone applications and 2017 mobile design awards</a></h4>
-                                        <p>Aenean interdum arcu blandit, vehicula magna non, placerat elit. Mauris et pharetratortor. Suspendissea sodales urna. In at augue elit. Vivamus enim nibh, maximus ac felis nec, maximus tempor odio.</p>
-                                        <small class="firstsmall"><a class="bg-orange" href="tech-category-01.html" title="">Gadgets</a></small>
-                                        <small><a href="tech-single.html" title="">21 July, 2017</a></small>
-                                        <small><a href="tech-author.html" title="">by Matilda</a></small>
-                                        <small><a href="tech-single.html" title=""><i class="fa fa-eye"></i> 1114</a></small>
+                                        <h4><a href="fullnews.php?newsid=<?php echo $recentRow['newsid'] ?>" title=""><?php echo $recentRow['title'] ?></p>
+                                        <small class="firstsmall"><a class="bg-orange" href="tech-category-01.html" title=""><?php echo $recentRow['categoryname'] ?></a></small>
+                                        <small><a href="fullnews.php?newsid=<?php echo $recentRow['newsid'] ?>" title=""><?php echo $recentRow['date'] ?></a></small>
+                                        <small><a href="fullnews.php?newsid=<?php echo $recentRow['newsid'] ?>" title="">by <?php echo $recentRow['authorname'] ?></a></small>
+                                        <small><a href="fullnews.php?newsid=<?php echo $recentRow['newsid'] ?>" title=""><i class="fa fa-eye"></i><?php echo $recentRow['views'] ?></a></small>
                                     </div><!-- end meta -->
                                 </div><!-- end blog-box -->
 
-                                <hr class="invis">
-
-                                <div class="blog-box row">
-                                    <div class="col-md-4">
-                                        <div class="post-media">
-                                            <a href="tech-single.html" title="">
-                                                <img src="upload/tech_blog_02.jpg" alt="" class="img-fluid">
-                                                <div class="hovereffect"></div>
-                                            </a>
-                                        </div><!-- end media -->
-                                    </div><!-- end col -->
-
-                                    <div class="blog-meta big-meta col-md-8">
-                                        <h4><a href="tech-single.html" title="">A device you can use both headphones and usb</a></h4>
-                                        <p>Aenean interdum arcu blandit, vehicula magna non, placerat elit. Mauris et pharetratortor. Suspendissea sodales urna. In at augue elit. Vivamus enim nibh, maximus ac felis nec, maximus tempor odio.</p>
-                                        <small class="firstsmall"><a class="bg-orange" href="tech-category-01.html" title="">Technology</a></small>
-                                        <small><a href="tech-single.html" title="">21 July, 2017</a></small>
-                                        <small><a href="tech-author.html" title="">by Matilda</a></small>
-                                        <small><a href="tech-single.html" title=""><i class="fa fa-eye"></i> 4412</a></small>
-                                    </div><!-- end meta -->
-                                </div><!-- end blog-box -->
-
-                                <hr class="invis">
-
-                                <div class="blog-box row">
-                                    <div class="col-md-4">
-                                        <div class="post-media">
-                                            <a href="tech-single.html" title="">
-                                                <img src="upload/tech_blog_03.jpg" alt="" class="img-fluid">
-                                                <div class="hovereffect"></div>
-                                            </a>
-                                        </div><!-- end media -->
-                                    </div><!-- end col -->
-
-                                    <div class="blog-meta big-meta col-md-8">
-                                        <h4><a href="tech-single.html" title="">Two brand new laptop models from ABC computer</a></h4>
-                                        <p>Aenean interdum arcu blandit, vehicula magna non, placerat elit. Mauris et pharetratortor. Suspendissea sodales urna. In at augue elit. Vivamus enim nibh, maximus ac felis nec, maximus tempor odio.</p>
-                                        <small class="firstsmall"><a class="bg-orange" href="tech-category-01.html" title="">Development</a></small>
-                                        <small><a href="tech-single.html" title="">20 July, 2017</a></small>
-                                        <small><a href="tech-author.html" title="">by Matilda</a></small>
-                                        <small><a href="tech-single.html" title=""><i class="fa fa-eye"></i> 2313</a></small>
-                                    </div><!-- end meta -->
-                                </div><!-- end blog-box -->
-
-                                <hr class="invis">
-
-                                <div class="row">
-                                    <div class="col-lg-10 offset-lg-1">
-                                        <div class="banner-spot clearfix">
-                                            <div class="banner-img">
-                                                <img src="upload/banner_02.jpg" alt="" class="img-fluid">
-                                            </div><!-- end banner-img -->
-                                        </div><!-- end banner -->
-                                    </div><!-- end col -->
-                                </div><!-- end row -->
-
-                                <hr class="invis">
-
-                                <div class="blog-box row">
-                                    <div class="col-md-4">
-                                        <div class="post-media">
-                                            <a href="tech-single.html" title="">
-                                                <img src="upload/tech_blog_04.jpg" alt="" class="img-fluid">
-                                                <div class="hovereffect"></div>
-                                            </a>
-                                        </div><!-- end media -->
-                                    </div><!-- end col -->
-
-                                    <div class="blog-meta big-meta col-md-8">
-                                        <h4><a href="tech-single.html" title="">Applications for taking photos of nature in your mobile phones</a></h4>
-                                        <p>Aenean interdum arcu blandit, vehicula magna non, placerat elit. Mauris et pharetratortor. Suspendissea sodales urna. In at augue elit. Vivamus enim nibh, maximus ac felis nec, maximus tempor odio.</p>
-                                        <small class="firstsmall"><a class="bg-orange" href="tech-category-01.html" title="">Design</a></small>
-                                        <small><a href="tech-single.html" title="">19 July, 2017</a></small>
-                                        <small><a href="tech-author.html" title="">by Matilda</a></small>
-                                        <small><a href="tech-single.html" title=""><i class="fa fa-eye"></i> 4441</a></small>
-                                    </div><!-- end meta -->
-                                </div><!-- end blog-box -->
-
-                                <hr class="invis">
-
-                                <div class="blog-box row">
-                                    <div class="col-md-4">
-                                        <div class="post-media">
-                                            <a href="tech-single.html" title="">
-                                                <img src="upload/tech_blog_05.jpg" alt="" class="img-fluid">
-                                                <div class="hovereffect"></div>
-                                            </a>
-                                        </div><!-- end media -->
-                                    </div><!-- end col -->
-
-                                    <div class="blog-meta big-meta col-md-8">
-                                        <h4><a href="tech-single.html" title="">Say hello to colored strap models in smart hours</a></h4>
-                                        <p>Aenean interdum arcu blandit, vehicula magna non, placerat elit. Mauris et pharetratortor. Suspendissea sodales urna. In at augue elit. Vivamus enim nibh, maximus ac felis nec, maximus tempor odio.</p>
-                                        <small class="firstsmall"><a class="bg-orange" href="tech-category-01.html" title="">Materials</a></small>
-                                        <small><a href="tech-single.html" title="">18 July, 2017</a></small>
-                                        <small><a href="tech-author.html" title="">by Matilda</a></small>
-                                        <small><a href="tech-single.html" title=""><i class="fa fa-eye"></i> 33312</a></small>
-                                    </div><!-- end meta -->
-                                </div><!-- end blog-box -->
-
-                                <hr class="invis">
-
-                                <div class="blog-box row">
-                                    <div class="col-md-4">
-                                        <div class="post-media">
-                                            <a href="tech-single.html" title="">
-                                                <img src="upload/tech_blog_06.jpg" alt="" class="img-fluid">
-                                                <div class="hovereffect"></div>
-                                            </a>
-                                        </div><!-- end media -->
-                                    </div><!-- end col -->
-
-                                    <div class="blog-meta big-meta col-md-8">
-                                        <h4><a href="tech-single.html" title="">How about evaluating your old mobile phones in different ways?</a></h4>
-                                        <p>Aenean interdum arcu blandit, vehicula magna non, placerat elit. Mauris et pharetratortor. Suspendissea sodales urna. In at augue elit. Vivamus enim nibh, maximus ac felis nec, maximus tempor odio.</p>
-                                        <small class="firstsmall"><a class="bg-orange" href="tech-category-01.html" title="">Gadgets</a></small>
-                                        <small><a href="tech-single.html" title="">17 July, 2017</a></small>
-                                        <small><a href="tech-author.html" title="">by Matilda</a></small>
-                                        <small><a href="tech-single.html" title=""><i class="fa fa-eye"></i> 4440</a></small>
-                                    </div><!-- end meta -->
-                                </div><!-- end blog-box -->
-
-                                <hr class="invis">
-
-                                <div class="blog-box row">
-                                    <div class="col-md-4">
-                                        <div class="post-media">
-                                            <a href="tech-single.html" title="">
-                                                <img src="upload/tech_blog_07.jpg" alt="" class="img-fluid">
-                                                <div class="hovereffect"></div>
-                                            </a>
-                                        </div><!-- end media -->
-                                    </div><!-- end col -->
-
-                                    <div class="blog-meta big-meta col-md-8">
-                                        <h4><a href="tech-single.html" title="">Drinking coffee at the computer rests the spirit</a></h4>
-                                        <p>Aenean interdum arcu blandit, vehicula magna non, placerat elit. Mauris et pharetratortor. Suspendissea sodales urna. In at augue elit. Vivamus enim nibh, maximus ac felis nec, maximus tempor odio.</p>
-                                        <small class="firstsmall"><a class="bg-orange" href="tech-category-01.html" title="">Technology</a></small>
-                                        <small><a href="tech-single.html" title="">16 July, 2017</a></small>
-                                        <small><a href="tech-author.html" title="">by Matilda</a></small>
-                                        <small><a href="tech-single.html" title=""><i class="fa fa-eye"></i> 4412</a></small>
-                                    </div><!-- end meta -->
-                                </div><!-- end blog-box -->
-
-                                <hr class="invis">
-
-                                <div class="blog-box row">
-                                    <div class="col-md-4">
-                                        <div class="post-media">
-                                            <a href="tech-single.html" title="">
-                                                <img src="upload/tech_blog_08.jpg" alt="" class="img-fluid">
-                                                <div class="hovereffect"></div>
-                                            </a>
-                                        </div><!-- end media -->
-                                    </div><!-- end col -->
-
-                                    <div class="blog-meta big-meta col-md-8">
-                                        <h4><a href="tech-single.html" title="">If you are considering buying a new safe for your mobile phone, be sure to read this article</a></h4>
-                                        <p>Aenean interdum arcu blandit, vehicula magna non, placerat elit. Mauris et pharetratortor. Suspendissea sodales urna. In at augue elit. Vivamus enim nibh, maximus ac felis nec, maximus tempor odio.</p>
-                                        <small class="firstsmall"><a class="bg-orange" href="tech-category-01.html" title="">Reviews</a></small>
-                                        <small><a href="tech-single.html" title="">15 July, 2017</a></small>
-                                        <small><a href="tech-author.html" title="">by Matilda</a></small>
-                                        <small><a href="tech-single.html" title=""><i class="fa fa-eye"></i> 44123</a></small>
-                                    </div><!-- end meta -->
-                                </div><!-- end blog-box -->
-
-                                <hr class="invis">
-
-                                <div class="blog-box row">
-                                    <div class="col-md-4">
-                                        <div class="post-media">
-                                            <a href="tech-single.html" title="">
-                                                <img src="upload/tech_blog_09.jpg" alt="" class="img-fluid">
-                                                <div class="hovereffect"></div>
-                                            </a>
-                                        </div><!-- end media -->
-                                    </div><!-- end col -->
-
-                                    <div class="blog-meta big-meta col-md-8">
-                                        <h4><a href="tech-single.html" title="">Enjoy a summer with a colorful headset</a></h4>
-                                        <p>Aenean interdum arcu blandit, vehicula magna non, placerat elit. Mauris et pharetratortor. Suspendissea sodales urna. In at augue elit. Vivamus enim nibh, maximus ac felis nec, maximus tempor odio.</p>
-                                        <small class="firstsmall"><a class="bg-orange" href="tech-category-01.html" title="">Technology</a></small>
-                                        <small><a href="tech-single.html" title="">14 July, 2017</a></small>
-                                        <small><a href="tech-author.html" title="">by Matilda</a></small>
-                                        <small><a href="tech-single.html" title=""><i class="fa fa-eye"></i> 2214</a></small>
-                                    </div><!-- end meta -->
-                                </div><!-- end blog-box -->
-
-                                <hr class="invis">
-
-                                <div class="blog-box row">
-                                    <div class="col-md-4">
-                                        <div class="post-media">
-                                            <a href="tech-single.html" title="">
-                                                <img src="upload/tech_blog_10.jpg" alt="" class="img-fluid">
-                                                <div class="hovereffect"></div>
-                                            </a>
-                                        </div><!-- end media -->
-                                    </div><!-- end col -->
-
-                                    <div class="blog-meta big-meta col-md-8">
-                                        <h4><a href="tech-single.html" title="">Google has developed a brand new algorithm. Forget all your knowledge!</a></h4>
-                                        <p>Aenean interdum arcu blandit, vehicula magna non, placerat elit. Mauris et pharetratortor. Suspendissea sodales urna. In at augue elit. Vivamus enim nibh, maximus ac felis nec, maximus tempor odio.</p>
-                                        <small class="firstsmall"><a class="bg-orange" href="tech-category-01.html" title="">Gadgets</a></small>
-                                        <small><a href="tech-single.html" title="">13 July, 2017</a></small>
-                                        <small><a href="tech-author.html" title="">by Matilda</a></small>
-                                        <small><a href="tech-single.html" title=""><i class="fa fa-eye"></i> 3331</a></small>
-                                    </div><!-- end meta -->
-                                </div><!-- end blog-box -->
+                            <hr class="invis">
+                            
+                            <?php
+                                }
+                            }
+                            ?>
+                            
                             </div><!-- end blog-list -->
                         </div><!-- end page-wrapper -->
 
@@ -431,51 +244,33 @@ if(!isset($_COOKIE['userauth']) && $_COOKIE['userauth']!="true"){
                             <div class="widget">
                                 <h2 class="widget-title">Trend News</h2>
                                 <div class="trend-videos">
+                                    <?php
+                                    $trendQuery = "SELECT *, (SELECT imagename FROM news_image WHERE imageid = (SELECT MIN(imageid) FROM news_image WHERE news.newsid = news_image.newsid)) as imagename FROM news ORDER BY date DESC, views DESC LIMIT 3";
+                                    $trendResult = mysqli_query($conn, $trendQuery);
+                                    if($trendQuery){
+                                        while($trendRow = mysqli_fetch_array($trendResult)){
+                                    ?>
                                     <div class="blog-box">
                                         <div class="post-media">
-                                            <a href="tech-single.html" title="">
-                                                <img src="upload/tech_video_01.jpg" alt="" class="img-fluid">
+                                            <a href="fullnews.php?newsid=<?php echo $recentRow['newsid'] ?>" title="">
+                                                <img src="../admin/newsimage/<?php echo $trendRow['imagename'] ?>" alt="" class="img-fluid">
                                                 <div class="hovereffect">
                                                     <span class="videohover"></span>
                                                 </div><!-- end hover -->
                                             </a>
                                         </div><!-- end media -->
                                         <div class="blog-meta">
-                                            <h4><a href="tech-single.html" title="">We prepared the best 10 laptop presentations for you</a></h4>
+                                            <h4><a href="fullnews.php?newsid=<?php echo $trendRow['newsid'] ?>" title=""><?php echo $trendRow['title'] ?></a></h4>
                                         </div><!-- end meta -->
                                     </div><!-- end blog-box -->
 
                                     <hr class="invis">
+                                    <?php
+                                        }
+                                    }
+                                    ?>
 
-                                    <div class="blog-box">
-                                        <div class="post-media">
-                                            <a href="tech-single.html" title="">
-                                                <img src="upload/tech_video_02.jpg" alt="" class="img-fluid">
-                                                <div class="hovereffect">
-                                                    <span class="videohover"></span>
-                                                </div><!-- end hover -->
-                                            </a>
-                                        </div><!-- end media -->
-                                        <div class="blog-meta">
-                                            <h4><a href="tech-single.html" title="">We are guests of ABC Design Studio - Vlog</a></h4>
-                                        </div><!-- end meta -->
-                                    </div><!-- end blog-box -->
-
-                                    <hr class="invis">
-
-                                    <div class="blog-box">
-                                        <div class="post-media">
-                                            <a href="tech-single.html" title="">
-                                                <img src="upload/tech_video_03.jpg" alt="" class="img-fluid">
-                                                <div class="hovereffect">
-                                                    <span class="videohover"></span>
-                                                </div><!-- end hover -->
-                                            </a>
-                                        </div><!-- end media -->
-                                        <div class="blog-meta">
-                                            <h4><a href="tech-single.html" title="">Both blood pressure monitor and intelligent clock</a></h4>
-                                        </div><!-- end meta -->
-                                    </div><!-- end blog-box -->
+                                    
                                 </div><!-- end videos -->
                             </div><!-- end widget -->
 
