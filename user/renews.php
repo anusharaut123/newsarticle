@@ -109,7 +109,7 @@ if(!isset($_COOKIE['userauth']) && $_COOKIE['userauth']!="true"){
                 <div class="masonry-blog clearfix">
                     <div class="first-slot">
                         <div class="masonry-box post-media">
-                             <img src="../images/newspaper-template-design-vector-18862843.webp" alt="" class="img-fluid">
+                             <img src="../images/download.png" alt="" class="img-fluid">
                              <div class="shadoweffect">
                                 <div class="shadow-desc">
                                     <div class="blog-meta">
@@ -168,11 +168,11 @@ if(!isset($_COOKIE['userauth']) && $_COOKIE['userauth']!="true"){
                             </div><!-- end blog-top -->
 
                             <div class="blog-list clearfix">
-                                <div class="blog-box row">
+                                <div style="height:50%;" class="blog-box row">
                                     <div class="col-md-4">
-                                        <div class="post-media">
+                                        <div style="height: 100%;" class="post-media">
                                             <a href="tech-single.html" title="">
-                                                <img src="upload/tech_blog_01.jpg" alt="" class="img-fluid">
+                                                <img style="height: 100%;" src="../images/background-image.jpg" alt="" class="img-fluid">
                                                 <div class="hovereffect"></div>
                                             </a>
                                         </div><!-- end media -->
@@ -190,11 +190,11 @@ if(!isset($_COOKIE['userauth']) && $_COOKIE['userauth']!="true"){
 
                                 <hr class="invis">
 
-                                <div class="blog-box row">
+                                <div style="height:50%;" class="blog-box row">
                                     <div class="col-md-4">
-                                        <div class="post-media">
+                                        <div style="height: 100%;" class="post-media">
                                             <a href="tech-single.html" title="">
-                                                <img src="upload/tech_blog_02.jpg" alt="" class="img-fluid">
+                                                <img style="height: 100%;" src="../admin/newsimage/6493212202b94.png" alt="" class="img-fluid">
                                                 <div class="hovereffect"></div>
                                             </a>
                                         </div><!-- end media -->
@@ -212,11 +212,11 @@ if(!isset($_COOKIE['userauth']) && $_COOKIE['userauth']!="true"){
 
                                 <hr class="invis">
 
-                                <div class="blog-box row">
+                                <div style="height:50%;" class="blog-box row">
                                     <div class="col-md-4">
-                                        <div class="post-media">
+                                        <div style="height: 100%;" class="post-media">
                                             <a href="tech-single.html" title="">
-                                                <img src="upload/tech_blog_03.jpg" alt="" class="img-fluid">
+                                                <img style="height: 100%;" src="../images/download.jpg" alt="" class="img-fluid">
                                                 <div class="hovereffect"></div>
                                             </a>
                                         </div><!-- end media -->
@@ -234,23 +234,11 @@ if(!isset($_COOKIE['userauth']) && $_COOKIE['userauth']!="true"){
 
                                 <hr class="invis">
 
-                                <div class="row">
-                                    <div class="col-lg-10 offset-lg-1">
-                                        <div class="banner-spot clearfix">
-                                            <div class="banner-img">
-                                                <img src="upload/banner_02.jpg" alt="" class="img-fluid">
-                                            </div><!-- end banner-img -->
-                                        </div><!-- end banner -->
-                                    </div><!-- end col -->
-                                </div><!-- end row -->
-
-                                <hr class="invis">
-
-                                <div class="blog-box row">
+                                <div style="height:50%;" class="blog-box row">
                                     <div class="col-md-4">
-                                        <div class="post-media">
+                                        <div style="height: 100%;" class="post-media">
                                             <a href="tech-single.html" title="">
-                                                <img src="upload/tech_blog_04.jpg" alt="" class="img-fluid">
+                                                <img style="height: 100%;" src="../images/download.jpg" alt="" class="img-fluid">
                                                 <div class="hovereffect"></div>
                                             </a>
                                         </div><!-- end media -->
@@ -268,11 +256,11 @@ if(!isset($_COOKIE['userauth']) && $_COOKIE['userauth']!="true"){
 
                                 <hr class="invis">
 
-                                <div class="blog-box row">
+                                <div style="height:50%;" class="blog-box row">
                                     <div class="col-md-4">
-                                        <div class="post-media">
+                                        <div style="height: 100%;" class="post-media">
                                             <a href="tech-single.html" title="">
-                                                <img src="upload/tech_blog_05.jpg" alt="" class="img-fluid">
+                                                <img style="height: 100%;" src="../admin/newsimage/64e777506e722_1d4e8f8d37b4167b.jpg" alt="" class="img-fluid">
                                                 <div class="hovereffect"></div>
                                             </a>
                                         </div><!-- end media -->
@@ -290,11 +278,11 @@ if(!isset($_COOKIE['userauth']) && $_COOKIE['userauth']!="true"){
 
                                 <hr class="invis">
 
-                                <div class="blog-box row">
+                                <div style="height:50%;" class="blog-box row">
                                     <div class="col-md-4">
-                                        <div class="post-media">
+                                        <div style="height: 100%;" class="post-media">
                                             <a href="tech-single.html" title="">
-                                                <img src="upload/tech_blog_06.jpg" alt="" class="img-fluid">
+                                                <img style="height: 100%;" src="../images/downloads.png" alt="" class="img-fluid">
                                                 <div class="hovereffect"></div>
                                             </a>
                                         </div><!-- end media -->
@@ -312,11 +300,11 @@ if(!isset($_COOKIE['userauth']) && $_COOKIE['userauth']!="true"){
 
                                 <hr class="invis">
 
-                                <div class="blog-box row">
+                                <div style="height:50%;" class="blog-box row">
                                     <div class="col-md-4">
-                                        <div class="post-media">
+                                        <div style="height:100%;" class="post-media">
                                             <a href="tech-single.html" title="">
-                                                <img src="upload/tech_blog_07.jpg" alt="" class="img-fluid">
+                                                <img style="height: 100%;" src="../admin/newsimage/6493212202b94.png" alt="" class="img-fluid">
                                                 <div class="hovereffect"></div>
                                             </a>
                                         </div><!-- end media -->
@@ -334,11 +322,11 @@ if(!isset($_COOKIE['userauth']) && $_COOKIE['userauth']!="true"){
 
                                 <hr class="invis">
 
-                                <div class="blog-box row">
+                                <div style="height:50%;" class="blog-box row">
                                     <div class="col-md-4">
-                                        <div class="post-media">
+                                        <div style="height: 100%;" class="post-media">
                                             <a href="tech-single.html" title="">
-                                                <img src="upload/tech_blog_08.jpg" alt="" class="img-fluid">
+                                                <img style="height: 100%;" src="../images/iStock-872082360-1024x684.jpg" alt="" class="img-fluid">
                                                 <div class="hovereffect"></div>
                                             </a>
                                         </div><!-- end media -->
@@ -356,11 +344,11 @@ if(!isset($_COOKIE['userauth']) && $_COOKIE['userauth']!="true"){
 
                                 <hr class="invis">
 
-                                <div class="blog-box row">
+                                <div style="height:50%;" class="blog-box row">
                                     <div class="col-md-4">
-                                        <div class="post-media">
+                                        <div style="height:100%;" class="post-media">
                                             <a href="tech-single.html" title="">
-                                                <img src="upload/tech_blog_09.jpg" alt="" class="img-fluid">
+                                                <img style="height: 100%;" src="../images/iStock-872082360-1024x684.jpg" alt="" class="img-fluid">
                                                 <div class="hovereffect"></div>
                                             </a>
                                         </div><!-- end media -->
@@ -378,11 +366,11 @@ if(!isset($_COOKIE['userauth']) && $_COOKIE['userauth']!="true"){
 
                                 <hr class="invis">
 
-                                <div class="blog-box row">
+                                <div style="height:50%;" class="blog-box row">
                                     <div class="col-md-4">
-                                        <div class="post-media">
+                                        <div style="height: 100%;" class="post-media">
                                             <a href="tech-single.html" title="">
-                                                <img src="upload/tech_blog_10.jpg" alt="" class="img-fluid">
+                                                <img style="height: 100%;" src="../images/download.jpg" alt="" class="img-fluid">
                                                 <div class="hovereffect"></div>
                                             </a>
                                         </div><!-- end media -->
@@ -432,11 +420,11 @@ if(!isset($_COOKIE['userauth']) && $_COOKIE['userauth']!="true"){
                                 <h2 class="widget-title">Trend News</h2>
                                 <div class="trend-videos">
                                     <div class="blog-box">
-                                        <div class="post-media">
+                                        <div style="height: 300px;" class="post-media">
                                             <a href="tech-single.html" title="">
-                                                <img src="upload/tech_video_01.jpg" alt="" class="img-fluid">
-                                                <div class="hovereffect">
-                                                    <span class="videohover"></span>
+                                            <img style="height: 100%;" src="../images/imgbin-address-symbol-symbol-black-gps-illustration-WP0rxLvk52N1dXWUcdAfe9DBB.jpg" alt="" class="img-fluid">
+                                                <div style="height:300px;" class="hovereffect">
+                                                    <span  class="videohover"></span>
                                                 </div><!-- end hover -->
                                             </a>
                                         </div><!-- end media -->
@@ -448,10 +436,10 @@ if(!isset($_COOKIE['userauth']) && $_COOKIE['userauth']!="true"){
                                     <hr class="invis">
 
                                     <div class="blog-box">
-                                        <div class="post-media">
+                                        <div style="height: 300px;" class="post-media">
                                             <a href="tech-single.html" title="">
-                                                <img src="upload/tech_video_02.jpg" alt="" class="img-fluid">
-                                                <div class="hovereffect">
+                                                <img style="height: 100%;" src="../images/iStock-872082360-1024x684.jpg" alt="" class="img-fluid">
+                                                <div style="height: 300px;" class="hovereffect">
                                                     <span class="videohover"></span>
                                                 </div><!-- end hover -->
                                             </a>
@@ -464,10 +452,10 @@ if(!isset($_COOKIE['userauth']) && $_COOKIE['userauth']!="true"){
                                     <hr class="invis">
 
                                     <div class="blog-box">
-                                        <div class="post-media">
+                                        <div style="height: 300px;" class="post-media">
                                             <a href="tech-single.html" title="">
-                                                <img src="upload/tech_video_03.jpg" alt="" class="img-fluid">
-                                                <div class="hovereffect">
+                                                <img style="height: 100%;" src="../images/download.jpg" alt="" class="img-fluid">
+                                                <div style="height: 300px;" class="hovereffect">
                                                     <span class="videohover"></span>
                                                 </div><!-- end hover -->
                                             </a>
