@@ -113,7 +113,7 @@ if(isset($_COOKIE['userauth']) && $_COOKIE['userauth']=="true"){
                             $firstRecommend = $recommedationResult[0];
                         ?>
                         <div class="masonry-box post-media">
-                             <img src="../admin/newsimage/<?php echo $firstRecommend[8] ?>" alt="" class="img-fluid">
+                             <img style="height:100%" src="../admin/newsimage/<?php echo $firstRecommend[8] ?>" alt="" class="img-fluid">
                              <div class="shadoweffect">
                                 <div class="shadow-desc">
                                     <div class="blog-meta">
@@ -132,7 +132,7 @@ if(isset($_COOKIE['userauth']) && $_COOKIE['userauth']=="true"){
                             $secondRecommend = $recommedationResult[1];
                         ?>
                         <div class="masonry-box post-media">
-                             <img src="../admin/newsimage/<?php echo $secondRecommend[8] ?>" alt="" class="img-fluid">
+                             <img style="height:100%" src="../admin/newsimage/<?php echo $secondRecommend[8] ?>" alt="" class="img-fluid">
                              <div class="shadoweffect">
                                 <div class="shadow-desc">
                                     <div class="blog-meta">
@@ -151,7 +151,7 @@ if(isset($_COOKIE['userauth']) && $_COOKIE['userauth']=="true"){
                             $lastRecommend = $recommedationResult[2];
                         ?>
                         <div class="masonry-box post-media">
-                             <img src="../admin/newsimage/<?php echo $lastRecommend[8] ?>" alt="" class="img-fluid">
+                             <img style="height:100%" src="../admin/newsimage/<?php echo $lastRecommend[8] ?>" alt="" class="img-fluid">
                              <div class="shadoweffect">
                                 <div class="shadow-desc">
                                     <div class="blog-meta">
