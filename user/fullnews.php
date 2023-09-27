@@ -139,7 +139,8 @@ textarea {
   <div class="article">
     <h2 class="title"><?php echo $newsdata['title']; ?></h2>
     <p class="author"><?php echo $newsdata['authorname']; ?></p>
-    <p class="date">Saturday, July 8, 2023 </p>
+    <p>Date: <?php echo $newsdata['date']; ?></p>
+    <p>View count: <?php echo $newsdata['views']; ?></p>
     <?php
     $imageid = $newsdata['newsid'];
     $imagequery = "SELECT * FROM news_image WHERE newsid = '$imageid' LIMIT 3";

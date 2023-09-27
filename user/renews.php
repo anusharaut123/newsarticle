@@ -184,11 +184,11 @@ if(isset($_COOKIE['userauth']) && $_COOKIE['userauth']=="true"){
                                 while($recentRow = mysqli_fetch_array($recentResult)){
                             ?>
 
-                                <div class="blog-box row">
+                                <div style="height:50%;" class="blog-box row">
                                     <div class="col-md-4">
-                                        <div class="post-media">
+                                        <div style="height: 100%;" class="post-media">
                                             <a href="fullnews.php?newsid=<?php echo $recentRow['newsid'] ?>" title="">
-                                                <img src="../admin/newsimage/<?php echo $recentRow['imagename'] ?>" alt="" class="img-fluid">
+                                                <img style="height: 100%;" src="../admin/newsimage/<?php echo $recentRow['imagename'] ?>" alt="" class="img-fluid">
                                                 <div class="hovereffect"></div>
                                             </a>
                                         </div><!-- end media -->
@@ -196,7 +196,7 @@ if(isset($_COOKIE['userauth']) && $_COOKIE['userauth']=="true"){
 
                                     <div class="blog-meta big-meta col-md-8">
                                         <h4><a href="fullnews.php?newsid=<?php echo $recentRow['newsid'] ?>" title=""><?php echo $recentRow['title'] ?></p>
-                                        <small class="firstsmall"><a class="bg-orange" href="tech-category-01.html" title=""><?php echo $recentRow['categoryname'] ?></a></small>
+                                        <small class="firstsmall"><a class="bg-orange" href="fullnews.php?newsid=<?php echo $recentRow['newsid'] ?>" title=""><?php echo $recentRow['categoryname'] ?></a></small>
                                         <small><a href="fullnews.php?newsid=<?php echo $recentRow['newsid'] ?>" title=""><?php echo $recentRow['date'] ?></a></small>
                                         <small><a href="fullnews.php?newsid=<?php echo $recentRow['newsid'] ?>" title="">by <?php echo $recentRow['authorname'] ?></a></small>
                                         <small><a href="fullnews.php?newsid=<?php echo $recentRow['newsid'] ?>" title=""><i class="fa fa-eye"></i><?php echo $recentRow['views'] ?></a></small>
@@ -251,10 +251,10 @@ if(isset($_COOKIE['userauth']) && $_COOKIE['userauth']=="true"){
                                         while($trendRow = mysqli_fetch_array($trendResult)){
                                     ?>
                                     <div class="blog-box">
-                                        <div class="post-media">
+                                        <div style="height: 300px" class="post-media">
                                             <a href="fullnews.php?newsid=<?php echo $recentRow['newsid'] ?>" title="">
-                                                <img src="../admin/newsimage/<?php echo $trendRow['imagename'] ?>" alt="" class="img-fluid">
-                                                <div class="hovereffect">
+                                                <img style="height: 100%;" src="../admin/newsimage/<?php echo $trendRow['imagename'] ?>" alt="" class="img-fluid">
+                                                <div style="height:300px;" class="hovereffect">
                                                     <span class="videohover"></span>
                                                 </div><!-- end hover -->
                                             </a>
