@@ -64,7 +64,7 @@ if($data == 3){
         // print_r($newDetailRow);
     }
 } else {
-    $zeroSql = "SELECT *, (SELECT imagename FROM news_image WHERE imageid = (SELECT MIN(imageid) FROM news_image WHERE news.newsid = news_image.newsid)) as imagename, (SELECT categoryname from category where news.category = category.categoryid ) as categoryname FROM news WHERE date >= NOW() - INTERVAL 14 DAY ORDER BY date DESC, views DESC LIMIT 3";
+    $zeroSql = "SELECT *, (SELECT imagename FROM news_image WHERE imageid = (SELECT MIN(imageid) FROM news_image WHERE news.newsid = news_image.newsid)) as imagename, (SELECT categoryname from category where news.category = category.categoryid ) as categoryname FROM news WHERE date >= NOW() - INTERVAL 30 DAY ORDER BY date DESC, views DESC LIMIT 3";
     $zeroStmt = mysqli_prepare($conn, $zeroSql);
     mysqli_stmt_execute($zeroStmt);
     $result = mysqli_stmt_get_result($zeroStmt);
