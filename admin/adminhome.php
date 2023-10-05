@@ -36,7 +36,7 @@ if(!isset($_COOKIE['auth']) && $_COOKIE['auth']!="admintrue"){
     <div class="body">
       <h2>Latest News</h2>
       <?php
-            $query = "SELECT news.newsid as newsid, news.title as title, news.introduction as introduction, news_image.imagename as imagename FROM news join news_image on news.newsid=news_image.newsid";
+            $query = "SELECT news.newsid as newsid, MAX(news.title) as title, MAX(news.introduction) as introduction, MAX(news_image.imagename) as imagename FROM news JOIN news_image ON news.newsid = news_image.newsid GROUP BY news.newsid;";
             $result = mysqli_query($conn, $query);
             $data = mysqli_num_rows($result);
             if ($data > 0) {

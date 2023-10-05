@@ -26,7 +26,6 @@
             <li><a href="user/news.php">NEWS</a></li>
             <li><a href="#contact">CONTACT</a></li>
             <li><a href="user/loginsignup.php">LOGIN</a></li>
-
           </ul>
         </div>
 

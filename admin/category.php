@@ -51,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
            background-color: aqua;
            width: 50%;
            margin: auto;
-           height: 300px;
+           height: 350px;
            margin-top: 20px;
         }
 
