@@ -16,6 +16,16 @@ if(!isset($_COOKIE['auth']) && $_COOKIE['auth']!="admintrue"){
   <title>Admin Dashboard of NRS</title>
   <link rel="stylesheet" href="../style/dashboard.css">
   <style>
+     body {
+      display: flex;
+      margin: 0;
+    }
+
+    .wrap {
+      margin-left: 250px;
+      padding: 20px;
+    }
+
     .news-container {
       display: flex;
       justify-content: center;
@@ -30,7 +40,6 @@ if(!isset($_COOKIE['auth']) && $_COOKIE['auth']!="admintrue"){
 </head>
 
 <body>
-
 <?php include 'sidebar.php';?>
     <div class="wrap">
     <div class="body">

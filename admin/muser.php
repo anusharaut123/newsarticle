@@ -33,10 +33,13 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
   <title>Admin Dashboard</title>
   <link rel="stylesheet" href="../style/dashboard.css">
   <style>
-
     table {
         width: 100%;
         border-collapse: collapse;
+    }
+    .wrap {
+      margin-left: 250px;
+      padding: 20px;
     }
 
     th, td {
@@ -65,18 +68,18 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     button:hover {
         background-color: #c82333;
     }
-    table{
+    
+    table {
         padding: 20%;
         height: 90px;
         width: 100%;
     }
-.table{
-    height: 500px;
-    width: 100%;
-
-}
-
-  </style>
+    
+    .table {
+        height: 500px;
+        width: 100%;
+    }
+</style>
 
 </head>
 <body>
@@ -85,7 +88,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
    </div>
   
   <div class="wrap" >
-  <h2>Users</h2><br>
+  <h2>Users</h2>
   <div class="table">
   <table>
         <tr>

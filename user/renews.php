@@ -17,7 +17,7 @@ if(isset($_COOKIE['userauth']) && $_COOKIE['userauth']=="true"){
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
     <!-- Site Metas -->
-    <title>Tech Blog</title>
+    <title>NRS</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
