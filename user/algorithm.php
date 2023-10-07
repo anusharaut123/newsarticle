@@ -3,77 +3,139 @@ require "../db/connection.php";
 session_start();
 $userid = $_SESSION['userid'];
 
-/*
-Collect recently commented newsid at least 3 times
-From those newsid, collect all userid who commented on that news except user id
-from those user id collect news id;
-*/
-$query = "SELECT newsid FROM comments WHERE userid=$userid";
-$result = mysqli_query($conn, $query);
-$collectNewsId = array();
-if ($result) {
-    while ($row = mysqli_fetch_array($result)) {
-        $newsId = $row['newsid'];
-        // echo "News ID: $newsId<br>";
-        
-        $userquery = "SELECT userid FROM comments WHERE newsid = $newsId AND userid != $userid";
-        $userResult = mysqli_query($conn, $userquery);
-        if ($userResult) {
-            while ($userRow = mysqli_fetch_array($userResult)) {
-                $users = $userRow['userid'];
-                // echo "userid->".$users."<br>";
-                $newsArticleQuery = "SELECT newsid from comments WHERE userid='$users'";
-                $articleResult = mysqli_query($conn, $newsArticleQuery);
-                if($articleResult) {
-                    while($articleRow = mysqli_fetch_array($articleResult)) {
-                        $articleId = $articleRow['newsid'];
-                        // echo "article-->".$articleId."<br>";
-                        array_push($collectNewsId, $articleId);
-                    }
-                }
-            }
-        } else {
-            echo "No other users commented on this news.<br>";
+
+
+function cleanText($text) {
+    // Convert text to lowercase
+    $text = strtolower($text);
+
+    // Remove punctuation
+    $text = preg_replace("/[[:punct:]]+/", " ", $text);
+    $text = preg_replace("/\d+/", "", $text);
+
+    // Define stopwords
+    $stopwords = ["a", "an", "and", "are", "as", "at", "be", "by", "for", "from", "has", "he", "in", "is", "it", "its", "of", "on", "that", "the", "to", "was", "were", "will", "with"];
+
+    // Remove stopwords
+    $tokens = explode(" ", $text);
+    $tokens = array_filter($tokens, function($word) use ($stopwords) {
+        return !in_array($word, $stopwords);
+    });
+
+    // Reconstruct the text
+    $text = implode(" ", $tokens);
+
+    return $text;
+}
+
+function computeTF($document, $term) {
+    $count = 0;
+    $words = explode(' ', $document);
+    foreach ($words as $word) {
+        if ($word == $term) {
+            $count++;
         }
     }
-}else {
+    return $count / count($words);
+}
+
+function computeIDF($documents, $term) {
+    $N = count($documents);
+    $docsWithTerm = 0;
+    foreach ($documents as $doc) {
+        if (strpos($doc, $term) !== false) {
+            $docsWithTerm++;
+        }
+    }
+    if ($docsWithTerm == 0) return 0;
+    return log($N / $docsWithTerm);
+}
+
+
+function getEuclideanDistance($docScores, $recentDocScores) {
+    $sum = 0;
+    foreach ($docScores as $term => $score) {
+        $recentScore = $recentDocScores[$term] ?? 0;
+        $sum += pow($score - $recentScore, 2);
+    }
+    return sqrt($sum);
+}
+
+
+
+// Fetch user's commented articles
+$documents = [];
+$query = "SELECT n.introduction, n.description FROM news n JOIN comments c ON n.newsid = c.newsid WHERE c.userid = '$userid'";
+$result = mysqli_query($conn, $query);
+$concatenatedDocument = ''; // Initialize concatenated document
+
+if ($result) {
+    while ($newsRow = mysqli_fetch_array($result)) {
+        $cleaned = cleanText($newsRow['introduction'].$newsRow['description']); 
+        $concatenatedDocument .= ' ' . $cleaned;
+    }
+} else {
     echo "No recently commented news found.<br>";
 }
 
-// from collection of newid select data which are a week old and have high views
-$collectNewsId = array_unique($collectNewsId);
-// print_r($collectNewsId);
+$concatWords = explode(' ', $concatenatedDocument);
+$concatTfidfScores = [];
 
-$placeholders = rtrim(str_repeat('?,', count($collectNewsId)), ',');
-$sql = "SELECT *, (SELECT imagename FROM news_image WHERE imageid = (SELECT MIN(imageid) FROM news_image WHERE news.newsid = news_image.newsid)) as imagename, (SELECT categoryname from category where news.category = category.categoryid ) as categoryname FROM news WHERE newsid IN ($placeholders) AND date >= NOW() - INTERVAL 7 DAY ORDER BY date DESC, views DESC LIMIT 3";
+foreach ($concatWords as $word) {
+    $tf = computeTF($concatenatedDocument, $word);
+    $idf = computeIDF([$concatenatedDocument], $word);
+    $concatTfidfScores[$word] = $tf * $idf;
+}
 
-
-$stmt = mysqli_prepare($conn, $sql);
-
-$types = str_repeat('i', count($collectNewsId));
-mysqli_stmt_bind_param($stmt, $types, ...$collectNewsId);
-
-mysqli_stmt_execute($stmt);
-$recommedationResult = array();
-$result = mysqli_stmt_get_result($stmt);
-$data = mysqli_num_rows($result);
-if($data == 3){
-    while ($newDetailRow = mysqli_fetch_row($result)) {
-        array_push($recommedationResult, $newDetailRow);
-        // echo "<br>";
-        // print_r($newDetailRow);
-    }
-} else {
-    $zeroSql = "SELECT *, (SELECT imagename FROM news_image WHERE imageid = (SELECT MIN(imageid) FROM news_image WHERE news.newsid = news_image.newsid)) as imagename, (SELECT categoryname from category where news.category = category.categoryid ) as categoryname FROM news WHERE date >= NOW() - INTERVAL 30 DAY ORDER BY date DESC, views DESC LIMIT 3";
-    $zeroStmt = mysqli_prepare($conn, $zeroSql);
-    mysqli_stmt_execute($zeroStmt);
-    $result = mysqli_stmt_get_result($zeroStmt);
-    while ($newDetailRow = mysqli_fetch_row($result)) {
-        array_push($recommedationResult, $newDetailRow);
-        // echo "<br>";
-        // print_r($newDetailRow);
+// Fetch recent news articles
+$recentNews = [];
+$recentQuery = "SELECT newsid, introduction, description FROM news ORDER BY date DESC LIMIT 5";  // Assuming there's a date column
+$recentResult = mysqli_query($conn, $recentQuery);
+if ($recentResult) {
+    while ($newsRow = mysqli_fetch_array($recentResult)) {
+        $cleaned = cleanText($newsRow['introduction'].$newsRow['description']);
+        $recentNews[] = ['id' => $newsRow['newsid'], 'text' => $cleaned];
     }
 }
 
-mysqli_stmt_close($stmt);
+// Compute the TF-IDF scores for recent news articles
+$recentNewsTFIDFScores = [];
+foreach ($recentNews as $newsItem) {
+    $words = explode(' ', $newsItem['text']);
+    $tfidfScores = [];
+    foreach ($words as $word) {
+        $tf = computeTF($newsItem['text'], $word);
+        $idf = computeIDF(array_merge($documents, array_column($recentNews, 'text')), $word);
+        $tfidfScores[$word] = $tf * $idf;
+    }
+    $recentNewsTFIDFScores[] = ['id' => $newsItem['id'], 'scores' => $tfidfScores];
+}
+
+
+// Compute distances between concatenated user document and recent news articles
+$docScores = $concatTfidfScores;
+
+// echo "Comparing User's Comments with Recent News:<br>";
+
+$distances = [];
+foreach ($recentNewsTFIDFScores as $recentIndex => $recentScoresItem) {
+    $distance = getEuclideanDistance($docScores, $recentScoresItem['scores']);
+    $distances[] = ['distance' => $distance, 'id' => $recentScoresItem['id']];
+}
+
+// Sort by distance
+usort($distances, function($a, $b) {
+    return $a['distance'] <=> $b['distance'];
+});
+
+// Display top 3 distances
+for ($i = 0; $i < min(3, count($distances)); $i++) {
+    // echo "Top " . ($i + 1) . ": ";
+    // echo "Distance to Recent News Article with ID " . $distances[$i]['id'] . ": " . $distances[$i]['distance'] . "<br>";
+    $recommendationResult[] = $distances[$i]['id'];
+}
+
+// echo "<hr>";
+// print_r($recommendationResult);
+
 ?>
