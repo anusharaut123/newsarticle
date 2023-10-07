@@ -16,6 +16,16 @@ if(!isset($_COOKIE['auth']) && $_COOKIE['auth']!="admintrue"){
   <title>Admin Dashboard of NRS</title>
   <link rel="stylesheet" href="../style/dashboard.css">
   <style>
+     body {
+      display: flex;
+      margin: 0;
+    }
+
+    .wrap {
+      margin-left: 250px;
+      padding: 20px;
+    }
+
     .news-container {
       display: flex;
       justify-content: center;
@@ -30,13 +40,12 @@ if(!isset($_COOKIE['auth']) && $_COOKIE['auth']!="admintrue"){
 </head>
 
 <body>
-
 <?php include 'sidebar.php';?>
     <div class="wrap">
     <div class="body">
       <h2>Latest News</h2>
       <?php
-            $query = "SELECT news.newsid as newsid, news.title as title, news.introduction as introduction, news_image.imagename as imagename FROM news join news_image on news.newsid=news_image.newsid";
+            $query = "SELECT news.newsid as newsid, MAX(news.title) as title, MAX(news.introduction) as introduction, MAX(news_image.imagename) as imagename FROM news JOIN news_image ON news.newsid = news_image.newsid GROUP BY news.newsid;";
             $result = mysqli_query($conn, $query);
             $data = mysqli_num_rows($result);
             if ($data > 0) {

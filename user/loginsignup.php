@@ -62,7 +62,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
                   $_SESSION['usergender'] = $row['gender'];
                   $_SESSION['usersessionid'] = session_id();
                   setcookie('userauth', 'true', time() + 18000);
-                  header('location: myprofile.php');
+                  header('location: renews.php');
                   exit();
               } else {
                   $error = "Invalid email or password1.";

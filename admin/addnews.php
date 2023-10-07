@@ -15,13 +15,10 @@ require "validatenews.php";
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
- 
 </head>
 <body>
-  <div classname="sidebar col-md-4 mx-5 " >
     <?php include 'sidebar.php'; ?>
-  </div> 
-    <div classname="newsbody col-md-4" style="margin-left: 540px; margin-right:680px; margin-top:80px; background-color:pink; ">
+    <div classname="newsbody col-md-4" style="margin-left: 540px; margin-right:680px; background-color:pink; ">
       <form action="#" method="POST" enctype="multipart/form-data"  style="  background-color:pink; width: 580px; padding:30px;">
         <h1>Add News</h1>
         <hr style="color: black;">
@@ -59,7 +56,6 @@ require "validatenews.php";
           <label for="image">Image <?php if(isset($imageerror)) echo $imageerror; ?></label>
           <br>
           <br>
-          
           <button type="button" name="image" class="plus-button" id="add-image">
             <i class="fas fa-plus"></i> +
           </button>

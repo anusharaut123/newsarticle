@@ -10,7 +10,9 @@ if(!isset($_COOKIE['auth']) && $_COOKIE['auth']!="admintrue"){
   <head>
     <link rel="stylesheet" href="../style/sidebar.css">
   </head>
-  <body><div class="area"></div><nav class="main-menu">
+  <body>
+    <div class="area">
+        <nav class="main-menu">
             <ul>
                 <h2 class="headingsidebar">News Article</h2>
                 <li>
@@ -61,5 +63,6 @@ if(!isset($_COOKIE['auth']) && $_COOKIE['auth']!="admintrue"){
                 </li>  
             </ul>
         </nav>
+        </div>
   </body>
     </html>
