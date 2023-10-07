@@ -110,36 +110,52 @@ if(isset($_COOKIE['userauth']) && $_COOKIE['userauth']=="true"){
                 <div class="masonry-blog clearfix">
                     <div class="first-slot">
                         <?php
-                            $firstRecommend = $recommedationResult[0];
+                            $placeholders = implode(',', array_fill(0, count($recommendationResult), '?'));
+
+                            $query = "SELECT *, (SELECT imagename FROM news_image WHERE imageid = (SELECT MIN(imageid) FROM news_image WHERE news.newsid = news_image.newsid)) as imagename, (SELECT categoryname from category where news.category = category.categoryid ) as categoryname FROM news WHERE newsid IN ($placeholders)";
+                            $stmt = $conn->prepare($query);
+
+                            if ($stmt === false) {
+                                die("Error preparing the statement: " . $conn->error);
+                            }
+
+                            // Bind parameters
+                            $types = str_repeat('i', count($recommendationResult));  // 'i' denotes integer type
+                            $stmt->bind_param($types, ...$recommendationResult);
+
+                            $stmt->execute();
+                            $result = $stmt->get_result();
+                            $rowResult = $result->fetch_assoc();
+                           
+
                         ?>
                         <div class="masonry-box post-media">
-                             <img style="height:100%" src="../admin/newsimage/<?php echo $firstRecommend[8] ?>" alt="" class="img-fluid">
+                             <img style="height:100%" src="../admin/newsimage/<?php echo $rowResult['imagename'] ?>" alt="" class="img-fluid">
                              <div class="shadoweffect">
                                 <div class="shadow-desc">
                                     <div class="blog-meta">
-                                        <span class="bg-orange"><a href="fullnews.php?newsid=<?php echo $firstRecommend[0] ?>" title=""><?php echo $firstRecommend[9] ?></a></span>
-                                        <h4><a href="fullnews.php?newsid=<?php echo $firstRecommend[0] ?>" title=""><?php echo $firstRecommend[3] ?></a></h4>
-                                        <small><a href="fullnews.php?newsid=<?php echo $firstRecommend[0] ?>" title=""><?php echo $firstRecommend[6] ?></a></small>
-                                        <small><a href="fullnews.php?newsid=<?php echo $firstRecommend[0] ?>" title="">by <?php echo $firstRecommend[2] ?></a></small>
+                                        <span class="bg-orange"><a href="fullnews.php?newsid=<?php echo $rowResult['newsid'] ?>" title=""><?php echo $rowResult['categoryname'] ?></a></span>
+                                        <h4><a href="fullnews.php?newsid=<?php echo $rowResult['newsid'] ?>" title=""><?php echo $rowResult['title'] ?></a></h4>
+                                        <small><a href="fullnews.php?newsid=<?php echo $rowResult['newsid'] ?>" title=""><?php echo $rowResult['date'] ?></a></small>
+                                        <small><a href="fullnews.php?newsid=<?php echo $rowResult['newsid'] ?>" title="">by <?php echo $rowResult['authorname'] ?></a></small>
                                     </div><!-- end meta -->
                                 </div><!-- end shadow-desc -->
                             </div><!-- end shadow -->
                         </div><!-- end post-media -->
                     </div><!-- end first-side -->
-
                     <div class="second-slot">
-                        <?php
-                            $secondRecommend = $recommedationResult[1];
-                        ?>
-                        <div class="masonry-box post-media">
-                             <img style="height:100%" src="../admin/newsimage/<?php echo $secondRecommend[8] ?>" alt="" class="img-fluid">
+                    <?php
+                        $rowResult = $result->fetch_assoc();
+                    ?>
+                    <div class="masonry-box post-media">
+                             <img style="height:100%" src="../admin/newsimage/<?php echo $rowResult['imagename'] ?>" alt="" class="img-fluid">
                              <div class="shadoweffect">
                                 <div class="shadow-desc">
                                     <div class="blog-meta">
-                                        <span class="bg-orange"><a href="fullnews.php?newsid=<?php echo $secondRecommend[0] ?>" title=""><?php echo $secondRecommend[9] ?></a></span>
-                                        <h4><a href="fullnews.php?newsid=<?php echo $secondRecommend[0] ?>" title=""><?php echo $secondRecommend[3] ?></a></h4>
-                                        <small><a href="fullnews.php?newsid=<?php echo $secondRecommend[0] ?>" title=""><?php echo $secondRecommend[6] ?></a></small>
-                                        <small><a href="fullnews.php?newsid=<?php echo $secondRecommend[0] ?>" title="">by <?php echo $secondRecommend[2] ?></a></small>
+                                        <span class="bg-orange"><a href="fullnews.php?newsid=<?php echo $rowResult['newsid'] ?>" title=""><?php echo $rowResult['categoryname'] ?></a></span>
+                                        <h4><a href="fullnews.php?newsid=<?php echo $rowResult['newsid'] ?>" title=""><?php echo $rowResult['title'] ?></a></h4>
+                                        <small><a href="fullnews.php?newsid=<?php echo $rowResult['newsid'] ?>" title=""><?php echo $rowResult['date'] ?></a></small>
+                                        <small><a href="fullnews.php?newsid=<?php echo $rowResult['newsid'] ?>" title="">by <?php echo $rowResult['authorname'] ?></a></small>
                                     </div><!-- end meta -->
                                 </div><!-- end shadow-desc -->
                             </div><!-- end shadow -->
@@ -148,17 +164,17 @@ if(isset($_COOKIE['userauth']) && $_COOKIE['userauth']=="true"){
 
                     <div class="last-slot">
                         <?php
-                            $lastRecommend = $recommedationResult[2];
+                            $rowResult = $result->fetch_assoc();
                         ?>
                         <div class="masonry-box post-media">
-                             <img style="height:100%" src="../admin/newsimage/<?php echo $lastRecommend[8] ?>" alt="" class="img-fluid">
+                             <img style="height:100%" src="../admin/newsimage/<?php echo $rowResult['imagename'] ?>" alt="" class="img-fluid">
                              <div class="shadoweffect">
                                 <div class="shadow-desc">
                                     <div class="blog-meta">
-                                        <span class="bg-orange"><a href="fullnews.php?newsid=<?php echo $lastRecommend[0] ?>" title=""><?php echo $lastRecommend[9] ?></a></span>
-                                        <h4><a href="fullnews.php?newsid=<?php echo $lastRecommend[0] ?>" title=""><?php echo $lastRecommend[3] ?></a></h4>
-                                        <small><a href="fullnews.php?newsid=<?php echo $lastRecommend[0] ?>" title=""><?php echo $lastRecommend[6] ?></a></small>
-                                        <small><a href="fullnews.php?newsid=<?php echo $lastRecommend[0] ?>" title="">by <?php echo $lastRecommend[2] ?></a></small>
+                                        <span class="bg-orange"><a href="fullnews.php?newsid=<?php echo $rowResult['newsid'] ?>" title=""><?php echo $rowResult['categoryname'] ?></a></span>
+                                        <h4><a href="fullnews.php?newsid=<?php echo $rowResult['newsid'] ?>" title=""><?php echo $rowResult['title'] ?></a></h4>
+                                        <small><a href="fullnews.php?newsid=<?php echo $rowResult['newsid'] ?>" title=""><?php echo $rowResult['date'] ?></a></small>
+                                        <small><a href="fullnews.php?newsid=<?php echo $rowResult['newsid'] ?>" title="">by <?php echo $rowResult['authorname'] ?></a></small>
                                     </div><!-- end meta -->
                                 </div><!-- end shadow-desc -->
                             </div><!-- end shadow -->
