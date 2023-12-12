@@ -194,7 +194,7 @@ if(isset($_COOKIE['userauth']) && $_COOKIE['userauth']=="true"){
 
                             <div class="blog-list clearfix">
                             <?php
-                            $recentQuery = "SELECT *, (SELECT imagename FROM news_image WHERE imageid = (SELECT MIN(imageid) FROM news_image WHERE news.newsid = news_image.newsid)) as imagename, (SELECT categoryname from category where news.category = category.categoryid ) as categoryname FROM news WHERE date >= NOW() - INTERVAL 30 DAY ORDER BY date DESC";
+                            $recentQuery = "SELECT *, (SELECT imagename FROM news_image WHERE imageid = (SELECT MIN(imageid) FROM news_image WHERE news.newsid = news_image.newsid)) as imagename, (SELECT categoryname from category where news.category = category.categoryid ) as categoryname FROM news WHERE date >= NOW() - INTERVAL 300 DAY ORDER BY date DESC";
                             $recentResult = mysqli_query($conn, $recentQuery);
                             if($recentQuery){
                                 while($recentRow = mysqli_fetch_array($recentResult)){
