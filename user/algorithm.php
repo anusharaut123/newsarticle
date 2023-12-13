@@ -43,7 +43,7 @@ function computeIDF($documents, $term) {
     $N = count($documents);
     $docsWithTerm = 0;
     foreach ($documents as $doc) {
-        if (strpos($doc, $term) !== false) {
+        if (!empty($term) && strpos($doc, $term) !== false) {
             $docsWithTerm++;
         }
     }
@@ -89,7 +89,7 @@ foreach ($concatWords as $word) {
 
 // Fetch recent news articles
 $recentNews = [];
-$recentQuery = "SELECT newsid, introduction, description FROM news WHERE date >= NOW() - INTERVAL 30 DAY ORDER BY date DESC";  // Assuming there's a date column
+$recentQuery = "SELECT newsid, introduction, description FROM news WHERE date >= NOW() - INTERVAL 300 DAY ORDER BY date DESC";
 $recentResult = mysqli_query($conn, $recentQuery);
 if ($recentResult) {
     while ($newsRow = mysqli_fetch_array($recentResult)) {
