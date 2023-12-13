@@ -65,7 +65,8 @@ function getEuclideanDistance($docScores, $recentDocScores) {
 
 // Fetch user's commented articles
 $documents = [];
-$query = "SELECT n.introduction, n.description FROM news n JOIN comments c ON n.newsid = c.newsid WHERE c.userid = '$userid'";
+$query = "SELECT news.introduction, news.description, news.date, category.categoryid FROM news JOIN category ON news.category = category.categoryid WHERE news.date >= NOW() - INTERVAL 300 DAY ORDER BY news.views DESC, news.date DESC LIMIT 3";
+#$query = "SELECT n.introduction, n.description FROM news n JOIN comments c ON n.newsid = c.newsid WHERE c.userid = '$userid'";
 $result = mysqli_query($conn, $query);
 $concatenatedDocument = ''; // Initialize concatenated document
 
